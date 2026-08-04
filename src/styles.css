@@ -1,0 +1,905 @@
+/* ==========================================================================
+   Haven — tokens, typography, and section styles.
+   Palette rationale and contrast maths live in DESIGN.md.
+   ========================================================================== */
+
+:root {
+  /* Colour */
+  --ink-navy: #1b2a3a;
+  --ink-navy-2: #223447; /* raised panels inside dark sections */
+  --paper: #f7f5f0;
+  --paper-2: #fffdf8;
+  --ledger-green: #0e4d3c;
+  --seal-red: #b23a2e;
+  --filed-grey: #7a6f5d; /* rules and borders only — 4.53:1 on paper */
+  --filed-ink: #5c5346; /* secondary text — 6.93:1 on paper */
+  --text: #2b2b2b;
+  --paper-dim: #c9c2b4; /* secondary text on ink-navy — 8.24:1 */
+
+  --rule: color-mix(in srgb, var(--filed-grey) 42%, transparent);
+  --rule-strong: color-mix(in srgb, var(--filed-grey) 70%, transparent);
+  --rule-dark: color-mix(in srgb, var(--paper-dim) 26%, transparent);
+
+  /* Type */
+  --display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  --fs-hero: clamp(2.25rem, 5.6vw, 4.25rem);
+  --fs-h2: clamp(1.75rem, 3.4vw, 2.5rem);
+  --fs-h3: 1.1875rem;
+  --fs-lead: clamp(1.0625rem, 1.5vw, 1.25rem);
+  --fs-body: 1.0625rem;
+  --fs-sm: 0.9375rem;
+  --fs-label: 0.75rem;
+
+  /* Space */
+  --gutter: clamp(20px, 5vw, 48px);
+  --section-y: clamp(72px, 10vw, 128px);
+  --max: 1120px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px; /* clears the sticky header on anchor jumps */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  font-variation-settings: 'opsz' 96;
+  color: var(--ink-navy);
+}
+
+h3 {
+  font-family: var(--sans);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  font-size: var(--fs-h3);
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink-navy);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.on-ink :focus-visible {
+  outline-color: var(--paper);
+}
+
+/* --- Shared utilities ---------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.measure {
+  max-width: 62ch;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-feature-settings: 'tnum' 1;
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--filed-ink);
+}
+
+.on-ink .label {
+  color: var(--paper-dim);
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--filed-ink);
+}
+
+.on-ink {
+  background: var(--ink-navy);
+  color: var(--paper);
+}
+
+.on-ink h2,
+.on-ink h3 {
+  color: var(--paper);
+}
+
+.on-ink .lead {
+  color: var(--paper-dim);
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.on-ink .section-head {
+  border-bottom-color: var(--rule-dark);
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+/* Seal-red use #1 of 3. See DESIGN.md — do not add a fourth. */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 26px;
+  border: 1px solid var(--seal-red);
+  background: var(--seal-red);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.btn:hover {
+  background: #9c3226;
+  border-color: #9c3226;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn[disabled] {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+.btn .arrow {
+  font-family: var(--mono);
+  transition: transform 160ms ease;
+}
+
+.btn:hover .arrow {
+  transform: translateX(3px);
+}
+
+.btn-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--filed-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-strong);
+  padding-bottom: 3px;
+}
+
+.btn-quiet:hover {
+  color: var(--ink-navy);
+  border-bottom-color: var(--ink-navy);
+}
+
+/* --- Scroll reveal ------------------------------------------------------- */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 520ms ease, transform 520ms ease;
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 68px;
+}
+
+.wordmark {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.375rem;
+  letter-spacing: -0.02em;
+  color: var(--ink-navy);
+  text-decoration: none;
+  padding-bottom: 3px;
+  /* Seal-red use #3 of 3: the signature rule under the wordmark. */
+  border-bottom: 2px solid var(--seal-red);
+  line-height: 1.1;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 3vw, 32px);
+}
+
+.nav a {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--filed-ink);
+  text-decoration: none;
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+}
+
+.nav a:hover {
+  color: var(--ink-navy);
+  border-bottom-color: var(--ink-navy);
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  padding-block: clamp(56px, 9vw, 104px) clamp(48px, 7vw, 88px);
+}
+
+.hero h1 {
+  font-size: var(--fs-hero);
+  line-height: 1.04;
+  margin-block: 20px 22px;
+  max-width: 17ch;
+}
+
+.hero .lead {
+  max-width: 54ch;
+}
+
+.hero-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: baseline;
+}
+
+.hero-eyebrow span:not(:last-child)::after {
+  content: ' ·';
+  color: var(--filed-grey);
+}
+
+.hero-cta {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 28px;
+}
+
+.hero-cta .note {
+  font-size: var(--fs-sm);
+  color: var(--filed-ink);
+  max-width: 34ch;
+}
+
+.hero-strip {
+  margin-top: clamp(44px, 6vw, 72px);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding-block: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px 32px;
+}
+
+.hero-strip div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-strip .k {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--filed-ink);
+}
+
+.hero-strip .v {
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+
+/* ==========================================================================
+   Proof — the one dark section
+   ========================================================================== */
+
+/* The stamp overshoots its panel while landing. Clip on the x axis only, at
+   the section edge, so the page never gains a horizontal scrollbar; the
+   stamp's overhang below the panel stays visible. */
+#proof .wrap {
+  overflow-x: clip;
+}
+
+.proof-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 52px);
+  align-items: start;
+}
+
+/* Video slot — real recording drops in here, see src/content.js `proof`. */
+.video-slot {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--ink-navy-2);
+  border: 1px solid var(--rule-dark);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.video-slot video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-poster {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 24px;
+  /* faint ruled-paper wash so an empty slot still reads as "document" */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 27px,
+    var(--rule-dark) 27px 28px
+  );
+}
+
+.video-poster .play {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-dim);
+  display: grid;
+  place-items: center;
+  color: var(--paper);
+  font-family: var(--mono);
+  background: color-mix(in srgb, var(--ink-navy) 70%, transparent);
+}
+
+.video-poster .msg {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+}
+
+.proof-caption {
+  margin-top: 18px;
+  font-size: var(--fs-sm);
+  color: var(--paper-dim);
+  max-width: 64ch;
+}
+
+/* Before / after */
+
+.ba {
+  display: grid;
+  gap: 14px;
+}
+
+.ba-panel {
+  border: 1px solid var(--rule-dark);
+  border-radius: 2px;
+  padding: 22px 22px 20px;
+  background: var(--ink-navy-2);
+}
+
+.ba-panel .ba-role {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+}
+
+.ba-time {
+  font-family: var(--mono);
+  font-size: clamp(2rem, 5.5vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  margin-top: 10px;
+  color: var(--paper);
+  font-feature-settings: 'tnum' 1;
+}
+
+.ba-panel .ba-detail {
+  margin-top: 8px;
+  font-size: var(--fs-sm);
+  color: var(--paper-dim);
+}
+
+.ba-after {
+  position: relative;
+}
+
+/* keep the detail line clear of the stamp */
+.ba-after .ba-detail {
+  padding-right: 104px;
+}
+
+.ba-delta {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ba-delta::before,
+.ba-delta::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule-dark);
+}
+
+/* --- The stamp — seal-red use #2 of 3 ------------------------------------ */
+
+.stamp {
+  position: absolute;
+  right: -14px;
+  bottom: -26px;
+  z-index: 2;
+  width: 132px;
+  height: 132px;
+  pointer-events: none;
+  transform: rotate(-11deg) scale(1.55);
+  opacity: 0;
+}
+
+.stamp.is-in {
+  animation: stamp-down 380ms cubic-bezier(0.2, 0.9, 0.3, 1.35) forwards;
+}
+
+@keyframes stamp-down {
+  from {
+    transform: rotate(-11deg) scale(1.55);
+    opacity: 0;
+  }
+  70% {
+    transform: rotate(-11deg) scale(0.96);
+    opacity: 0.92;
+  }
+  to {
+    transform: rotate(-11deg) scale(1);
+    opacity: 0.92;
+  }
+}
+
+@media (min-width: 700px) {
+  .stamp {
+    width: 148px;
+    height: 148px;
+  }
+}
+
+/* ==========================================================================
+   Process
+   ========================================================================== */
+
+/* no border-top — the section-head rule already opens the list */
+.step {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 8px 32px;
+  padding-block: clamp(24px, 3.4vw, 36px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.step-code {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  color: var(--filed-ink);
+  padding-top: 5px;
+}
+
+.step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 60ch;
+}
+
+.step-body p {
+  color: var(--filed-ink);
+}
+
+.step-body .fact {
+  font-family: var(--mono);
+  font-size: var(--fs-sm);
+  color: var(--ledger-green);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Trust
+   ========================================================================== */
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(28px, 4vw, 56px);
+}
+
+.trust-block {
+  border-top: 2px solid var(--ledger-green);
+  padding-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.trust-block p {
+  color: var(--filed-ink);
+  max-width: 56ch;
+}
+
+.commit-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.commit-list li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  color: var(--filed-ink);
+  font-size: var(--fs-sm);
+}
+
+.commit-list li::before {
+  content: '✓';
+  font-family: var(--mono);
+  color: var(--ledger-green);
+  line-height: 1.6;
+}
+
+.commit-list strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Case studies — hidden until real numbers exist (SHOW_CASE_STUDIES). */
+.cases {
+  margin-top: clamp(40px, 6vw, 72px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.case {
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 22px;
+  background: var(--paper-2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.case-meta {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--filed-ink);
+}
+
+.case-delta {
+  font-family: var(--mono);
+  font-size: 1.375rem;
+  color: var(--ink-navy);
+  font-weight: 500;
+}
+
+.case-note {
+  font-size: var(--fs-sm);
+  color: var(--filed-ink);
+}
+
+/* ==========================================================================
+   Contact + footer
+   ========================================================================== */
+
+.contact-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 4px 40px;
+}
+
+.contact-cta {
+  margin-top: clamp(36px, 5vw, 52px);
+}
+
+.contact-line {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.contact-line:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.contact-line a,
+.contact-line .val {
+  font-family: var(--mono);
+  font-size: var(--fs-body);
+  color: var(--paper);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+/* both numbers stacked, flush left under one label */
+.val-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+}
+
+.contact-line a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.contact-line .val.plain {
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  color: var(--paper-dim);
+  line-height: 1.55;
+}
+
+.footer-bar {
+  border-top: 1px solid var(--rule-dark);
+  padding-block: 24px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+}
+
+.footer-bar .wordmark {
+  color: var(--paper);
+  font-size: 1.125rem;
+  /* seal-red stays in the header only — the footer bookend is a quiet rule */
+  border-bottom-color: var(--rule-dark);
+}
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 20px;
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  color: var(--paper-dim);
+}
+
+.footer-meta a {
+  color: var(--paper-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-dark);
+  padding-bottom: 2px;
+}
+
+.footer-meta a:hover {
+  color: var(--paper);
+  border-bottom-color: var(--paper);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 860px) {
+  .proof-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  :root {
+    --fs-body: 1rem;
+  }
+
+  .header-inner {
+    min-height: 60px;
+    flex-wrap: wrap;
+    padding-block: 10px;
+  }
+
+  .nav {
+    gap: 18px;
+  }
+
+  /* Step code moves above the heading, hairline rules stay. */
+  .step {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .step-code {
+    padding-top: 0;
+  }
+
+  /* stamp tucks inside the panel — hanging off the edge would push the page
+     wider than the viewport at small widths */
+  .stamp {
+    right: 6px;
+    bottom: -18px;
+  }
+
+  .footer-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav {
+    gap: 14px;
+  }
+
+  .nav a,
+  .label,
+  .step-code {
+    font-size: 0.6875rem;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .stamp {
+    width: 100px;
+    height: 100px;
+    right: 4px;
+    bottom: -16px;
+  }
+
+  .ba-after .ba-detail {
+    padding-right: 74px;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion — stamp renders already landed, nothing animates.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .stamp {
+    opacity: 0.92;
+    transform: rotate(-11deg) scale(1);
+    animation: none !important;
+  }
+}
