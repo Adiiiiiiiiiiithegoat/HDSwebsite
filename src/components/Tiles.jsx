@@ -15,6 +15,16 @@ export default function Tiles({ items }) {
             {item.tag ? <span className="tile-tag">{item.tag}</span> : null}
             <h3>{item.title}</h3>
             <p>{item.body}</p>
+            {/* Only linked tiles get this. Nothing else on the card said it
+                was clickable — the hover border never fires on a phone. */}
+            {item.href ? (
+              <span className="tile-cta">
+                More information
+                <span className="arrow" aria-hidden="true">
+                  &rarr;
+                </span>
+              </span>
+            ) : null}
           </>
         )
         return item.href ? (

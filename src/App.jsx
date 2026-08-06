@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import Header from './sections/Header.jsx'
+import SiteHeader from './components/SiteHeader.jsx'
 import Hero from './sections/Hero.jsx'
 import Proof from './sections/Proof.jsx'
 import Process from './sections/Process.jsx'
@@ -31,12 +31,22 @@ function useRevealOnce() {
   }, [])
 }
 
+// Was a private sections/Header.jsx that duplicated components/SiteHeader.jsx
+// with a hardcoded nav. Deleted in favour of the shared one, which is where the
+// phone hamburger lives — the CA page needs it as much as the other two.
+const NAV = [
+  { label: '← Home', href: '/' },
+  { label: 'Proof', href: '#proof' },
+  { label: 'Process', href: '#process' },
+  { label: 'Contact', href: '#contact' },
+]
+
 export default function App() {
   useRevealOnce()
 
   return (
     <>
-      <Header />
+      <SiteHeader nav={NAV} />
       <main id="main">
         <Hero />
         <Proof />

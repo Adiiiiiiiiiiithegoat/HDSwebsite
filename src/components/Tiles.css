@@ -27,8 +27,49 @@
   text-decoration: none;
 }
 
-a.tile:hover {
+/* Linked tiles (Industries → an industry page) are filled with the same green
+   used for buttons and link hovers, so the actionable cards are distinguishable
+   from the static ones at a glance. White on --accent-strong is 5.5:1 — the
+   reason that token exists rather than the decorative --accent (see DESIGN.md).
+   `a.tile` is 0-1-1 specificity, so the 0-2-0 `.on-ink .tile` block below still
+   wins inside dark sections and this does not leak there. */
+a.tile {
+  background: var(--accent-strong);
   border-color: var(--accent-strong);
+  color: #fff;
+  box-shadow: none;
+}
+
+a.tile .tile-tag,
+a.tile p {
+  color: color-mix(in srgb, #fff 84%, transparent);
+}
+
+a.tile:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+/* margin-top:auto pins it to the bottom of the card, so tiles with different
+   body lengths still line their CTAs up. */
+.tile-cta {
+  margin-top: auto;
+  padding-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tile-cta .arrow {
+  transition: transform 160ms ease;
+}
+
+a.tile:hover .tile-cta .arrow {
+  transform: translateX(4px);
 }
 
 /* Dark-section variant (Section `dark` prop) — a card needs to read as
