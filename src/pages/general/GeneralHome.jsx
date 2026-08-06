@@ -1,5 +1,6 @@
 import useRevealOnce from '../../hooks/useRevealOnce.js'
 import useRouteMeta from '../../hooks/useRouteMeta.js'
+import { HOME } from '../../seo.js'
 import SiteHeader from '../../components/SiteHeader.jsx'
 import Footer from '../../components/Footer.jsx'
 import { legal } from './content.js'
@@ -24,21 +25,17 @@ const NAV = [
   { label: 'Contact', href: '#cta' },
 ]
 
-// Matches index.html's server-rendered defaults — asserting them again here
+// Matches the prerendered defaults in index.html — asserting them again here
 // means returning to "/" after visiting another route (a client-side
 // navigation, so index.html never re-runs) restores the right meta instead
 // of leaving whatever the previous route's cleanup happened to revert to.
-const TITLE =
-  'Solution Haven — eliminate operational bottlenecks with AI, automation and custom software'
-const DESCRIPTION =
-  'Solution Haven helps businesses eliminate operational bottlenecks using AI, automation and custom software. We solve business problems — technology is only the tool.'
-
+//
 // Solution Haven's general homepage. Same design system as the CA Firms
 // page (tokens, utility classes, reveal-on-scroll behaviour — see
 // docs/design-system-audit.md), entirely new content and section set.
 export default function GeneralHome() {
   useRevealOnce()
-  useRouteMeta({ title: TITLE, description: DESCRIPTION, path: '/' })
+  useRouteMeta(HOME)
 
   return (
     <>

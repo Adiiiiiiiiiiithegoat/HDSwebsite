@@ -1,16 +1,16 @@
-# Deep links for the client routes in src/main.jsx.
+# Deliberately empty of routing rules.
 #
-# Destination is "/" not "/index.html": Pages canonicalises /index.html to /,
-# which turns a 200 rewrite into a 308 redirect and bounces deep links to the
-# homepage.
+# Every route in src/seo.js is prerendered to a real file at build time
+# (scripts/prerender.mjs), so /industries/ca-firms is served from
+# dist/industries/ca-firms/index.html and needs no rewrite. The old
+# `/industries/... / 200` rewrites are gone with it.
 #
-# And NOT a `/*` catch-all: that matches /assets/* too, so an asset request
-# that missed at an edge during a deploy came back as 200 text/html instead of
-# a 404 — which the /assets/* rule in _headers then marked immutable for a
-# year. The edge cached an HTML document under a .css URL and served whoever
-# hit that node a completely unstyled page. With no rule matching /assets/*,
-# public/404.html answers those with a real 404 instead.
+# And still NOT a `/*` catch-all: that matches /assets/* too, so an asset
+# request that missed at an edge during a deploy came back as 200 text/html
+# instead of a 404 — which the /assets/* rule in _headers then marked
+# immutable for a year. The edge cached an HTML document under a .css URL and
+# served whoever hit that node a completely unstyled page. Unmatched paths
+# fall through to public/404.html, which is what an unknown URL should return.
 #
-# Add a line here whenever a route is added to main.jsx.
-/industries/ca-firms  /  200
-/industries/solar     /  200
+# Add a route to AppRoutes.jsx and seo.js and it prerenders itself. Nothing to
+# add here.

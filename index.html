@@ -17,26 +17,37 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <title>Solution Haven — eliminate operational bottlenecks with AI, automation and custom software</title>
+    <!-- Everything between these two markers is per-route: scripts/prerender.mjs
+         replaces the whole block with the values from src/seo.js when it writes
+         each route's static HTML. The homepage's values live here so `vite dev`
+         (which never runs the prerender) still has a sane head. Canonical is
+         needed because the site also answers on solutionhaven.pages.dev. -->
+    <!--head:start-->
+    <title>Solution Haven — workflow automation &amp; custom software</title>
     <meta
       name="description"
-      content="Solution Haven helps businesses eliminate operational bottlenecks using AI, automation and custom software. We solve business problems — technology is only the tool."
+      content="We find where your operations break — manual work, disconnected tools, slow approvals — then fix it with automation, integration or custom software."
     />
-
-    <!-- Open Graph — someone will paste this into a WhatsApp group or Slack. -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Solution Haven" />
-    <meta
-      property="og:title"
-      content="Solution Haven — eliminate operational bottlenecks with AI, automation and custom software"
-    />
+    <link rel="canonical" href="https://solutionhaven.net/" />
+    <meta property="og:title" content="Solution Haven — workflow automation &amp; custom software" />
     <meta
       property="og:description"
       content="We solve business problems using AI, automation and custom software — not the other way around. See how we work before you commit to anything."
     />
-    <!-- Canonical: the site also answers on solutionhaven.pages.dev; this is the real one. -->
-    <link rel="canonical" href="https://solutionhaven.net/" />
     <meta property="og:url" content="https://solutionhaven.net/" />
+    <meta
+      name="twitter:title"
+      content="Solution Haven — workflow automation &amp; custom software"
+    />
+    <meta
+      name="twitter:description"
+      content="We solve business problems using AI, automation and custom software — not the other way around."
+    />
+    <!--head:end-->
+
+    <!-- Open Graph — someone will paste this into a WhatsApp group or Slack. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Solution Haven" />
     <!-- Absolute URL required: several OG/Twitter card crawlers (WhatsApp
          included) don't reliably resolve a root-relative image URL against
          the page URL. -->
@@ -45,14 +56,6 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_IN" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Solution Haven — eliminate operational bottlenecks with AI, automation and custom software"
-    />
-    <meta
-      name="twitter:description"
-      content="We solve business problems using AI, automation and custom software — not the other way around."
-    />
     <meta name="twitter:image" content="https://solutionhaven.net/og.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -62,31 +65,60 @@
       rel="stylesheet"
     />
 
+    <!-- Site-wide entity. Per-route BreadcrumbList and FAQPage blocks are added
+         by scripts/prerender.mjs inside the head:start/head:end block above.
+
+         alternateName carries the name people actually type — "Haven
+         Solutions" (transposed) and "SolutionHaven" (no space). It tells
+         search and answer engines those strings refer to this entity; it does
+         not win the query on its own, see the note in README.
+
+         TODO: "sameAs" is the single highest-value field left empty here. Add
+         the LinkedIn company page, Google Business Profile, Crunchbase and any
+         directory listing as they go live — corroborating a business across
+         independent sources is most of what makes an answer engine willing to
+         name it. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": "https://solutionhaven.net/#organization",
         "name": "Solution Haven",
+        "alternateName": ["Haven Solutions", "SolutionHaven", "Solution Haven AI"],
         "url": "https://solutionhaven.net/",
         "logo": "https://solutionhaven.net/icon-512.png",
+        "image": "https://solutionhaven.net/og.png",
         "email": "aditya@solutionhaven.net",
+        "telephone": "+91 88797 60718",
         "description": "Solution Haven helps businesses eliminate operational bottlenecks using AI, automation, existing software, custom software and integrations.",
-        "areaServed": "IN"
+        "slogan": "We solve business problems. Technology is only the tool.",
+        "knowsAbout": [
+          "Business process automation",
+          "Workflow automation",
+          "AI automation for small and mid-sized businesses",
+          "Custom software development",
+          "Systems integration",
+          "GST return automation for chartered accountancy firms",
+          "Operations software for Solar EPC companies"
+        ],
+        "areaServed": { "@type": "Country", "name": "India" },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "aditya@solutionhaven.net",
+          "telephone": "+91 88797 60718",
+          "areaServed": "IN",
+          "availableLanguage": ["en", "hi"]
+        }
       }
     </script>
   </head>
   <body>
-    <!-- The header is painted from the HTML so the page is never blank while
-         the JS downloads — styles.css is a render-blocking <link> above, so
-         these classes are already applied at first paint. React clears this
-         on mount and renders the real header in its place. -->
-    <div id="root">
-      <header class="header">
-        <div class="wrap header-inner">
-          <span class="wordmark">Solution Haven</span>
-        </div>
-      </header>
-    </div>
+    <!-- scripts/prerender.mjs replaces this marker with the whole page, already
+         rendered to HTML, so there is nothing blank to paint over while the JS
+         downloads and a crawler that doesn't run JS still gets the full text.
+         `vite dev` leaves it empty — dev only, and dev has no crawlers. -->
+    <div id="root"><!--app--></div>
     <noscript>
       <div class="wrap" style="padding: 96px 0; max-width: 640px">
         <h1>This site needs JavaScript.</h1>

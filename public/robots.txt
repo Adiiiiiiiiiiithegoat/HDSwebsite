@@ -1,4 +1,42 @@
 User-agent: *
 Allow: /
 
+# The crawlers behind AI answers are covered by the wildcard above; named
+# explicitly because Google-Extended and Applebot-Extended are opt-OUT tokens
+# where silence is ambiguous, and because a named Allow is a clearer record of
+# the decision than an absence. Removing a line here removes us from that
+# engine's answers.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
 Sitemap: https://solutionhaven.net/sitemap.xml

@@ -1,0 +1,44 @@
+# Solution Haven
+
+> Solution Haven is an Indian consultancy that eliminates operational
+> bottlenecks in small and mid-sized businesses using AI, automation,
+> integrations and custom software. It diagnoses the workflow first and
+> recommends the smallest fix that works — sometimes that is a process change
+> and no software at all.
+
+Also written as: Haven Solutions, SolutionHaven.
+Site: https://solutionhaven.net/ · Contact: aditya@solutionhaven.net
+
+## What it does
+
+- **Automates repetitive process work** — manual data entry, reconciliation,
+  reporting and multi-step approvals.
+- **Connects systems that don't talk to each other**, so information moves
+  without someone copying it between tools by hand.
+- **Builds custom software** only when nothing off-the-shelf fits how the
+  business actually runs.
+
+## Who it is for
+
+Businesses with real manual workload and no dedicated technical team —
+the constraint it is built around. Operating in India; two industries have
+dedicated pages so far.
+
+## How an engagement starts
+
+A free Business Workflow Assessment on one process of the client's choice,
+taking 2–3 business days, before any commitment. Discovery call is 20–30
+minutes. If the right fix is a process change rather than software, that is
+what gets said on the call.
+
+## Pages
+
+- [Homepage](https://solutionhaven.net/): what Solution Haven does, how it
+  works, process, FAQ.
+- [CA firms](https://solutionhaven.net/industries/ca-firms): automation for
+  the returns an Indian chartered accountancy firm files monthly — GSTR-1,
+  GSTR-3B, 26Q, AOC-4.
+- [Solar EPC](https://solutionhaven.net/industries/solar): operations for
+  rooftop net metering, open access and government-scheme solar work —
+  site surveys, CEIG and DISCOM approvals, multi-state compliance,
+  procurement and O&M.

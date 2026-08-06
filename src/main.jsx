@@ -1,10 +1,8 @@
 import { StrictMode, Component, useEffect } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { createRoot, hydrateRoot } from 'react-dom/client'
+import { BrowserRouter, useLocation } from 'react-router-dom'
 import './styles.css'
-import GeneralHome from './pages/general/GeneralHome.jsx'
-import CAFirmsRoute from './routes/CAFirmsRoute.jsx'
-import SolarRoute from './routes/SolarRoute.jsx'
+import AppRoutes from './AppRoutes.jsx'
 
 // ponytail: routes are static imports, not lazy(). Each is ~13 kB against a
 // 232 kB entry bundle, so splitting them saved ~5% of transfer and cost a
@@ -67,21 +65,21 @@ function ScrollToTop() {
   return null
 }
 
-createRoot(document.getElementById('root')).render(
+const container = document.getElementById('root')
+
+const tree = (
   <StrictMode>
     <ErrorBoundary>
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<GeneralHome />} />
-          {/* Industry landing pages. CA Firms is the first; Manufacturing,
-              Logistics, Healthcare, Recruitment etc. slot in under the same
-              /industries/:slug pattern. */}
-          <Route path="/industries/ca-firms" element={<CAFirmsRoute />} />
-          <Route path="/industries/solar" element={<SolarRoute />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <AppRoutes />
       </BrowserRouter>
     </ErrorBoundary>
-  </StrictMode>,
+  </StrictMode>
 )
+
+// Built pages arrive prerendered (scripts/prerender.mjs), so attach to that
+// markup instead of throwing it away and repainting. `vite dev` serves an
+// empty #root — nothing to hydrate there, so fall back to a fresh root.
+if (container.firstChild) hydrateRoot(container, tree)
+else createRoot(container).render(tree)
