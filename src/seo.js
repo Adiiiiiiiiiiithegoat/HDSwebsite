@@ -21,18 +21,33 @@ export const HOME = {
     'We find where your operations break — manual work, disconnected tools, slow approvals — then fix it with automation, integration or custom software.',
 }
 
+// Brand goes LAST on the industry pages, first only on the homepage.
+//
+// "Solution Haven — GST & TDS filing automation for CA firms" reads to a
+// search engine, and to anything summarising one, as a definition of the
+// company: name, dash, what it is. Google's AI Overview duly described the
+// whole business as "an automation software platform built specifically for
+// Indian CA firms". "<what this page is about> | Solution Haven" says the
+// page is about that, published by us — which is the true statement. The
+// homepage keeps brand-first because there the company IS the subject.
 export const CA_FIRMS = {
   path: '/industries/ca-firms',
-  title: 'Solution Haven — GST & TDS filing automation for CA firms',
+  title: 'GST & TDS Filing Automation for CA Firms | Solution Haven',
   description:
     'Automation for the returns your firm files every month — GSTR-1, GSTR-3B, 26Q, AOC-4. A working demo on your own workflow in 3–5 business days.',
+  // Fed to the page's WebPage.about, which is how a machine reader learns
+  // this page covers one industry rather than defining the company.
+  about: 'Accounting practice automation for Indian chartered accountancy firms',
+  breadcrumb: 'CA firms',
 }
 
 export const SOLAR = {
   path: '/industries/solar',
-  title: 'Solution Haven — automation & software for Solar EPC',
+  title: 'Automation & Software for Solar EPC Companies | Solution Haven',
   description:
     'We map how your Solar EPC business runs — rooftop, open access or government-scheme — then apply AI, automation or software only where it removes real work.',
+  about: 'Operations automation for Solar EPC companies in India',
+  breadcrumb: 'Solar EPC',
 }
 
 export const routes = [HOME, CA_FIRMS, SOLAR]

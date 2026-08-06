@@ -11,8 +11,9 @@ import Approach from './sections/Approach.jsx'
 import FAQSection from './sections/FAQSection.jsx'
 import CTA from './sections/CTA.jsx'
 
+// Plain "Home" — see the note on the same list in src/App.jsx.
 const NAV = [
-  { label: '← Home', href: '/' },
+  { label: 'Home', href: '/' },
   { label: 'Workflow', href: '#workflow' },
   { label: 'Bottlenecks', href: '#bottlenecks' },
   { label: 'Approach', href: '#approach' },

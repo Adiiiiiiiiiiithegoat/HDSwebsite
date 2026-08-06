@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url'
 
 import { render } from '../dist-ssr/entry-server.js'
 import { routes, ORIGIN, HOME, CA_FIRMS, SOLAR } from '../src/seo.js'
-import { faq as generalFaq } from '../src/pages/general/content.js'
+import { faq as generalFaq, services } from '../src/pages/general/content.js'
 import { faq as solarFaq } from '../src/pages/solar/content.js'
 
 const dist = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist')
@@ -45,10 +45,72 @@ function breadcrumbs(route) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+      { '@type': 'ListItem', position: 1, name: 'Solution Haven', item: `${ORIGIN}/` },
       { '@type': 'ListItem', position: 2, name: 'Industries', item: `${ORIGIN}/#industries` },
-      { '@type': 'ListItem', position: 3, name: route.title, item: `${ORIGIN}${route.path}` },
+      // route.breadcrumb, not route.title — a breadcrumb reading "GST & TDS
+      // Filing Automation for CA Firms | Solution Haven" is the title again,
+      // and Google renders it under the result as if it were the site's
+      // structure.
+      { '@type': 'ListItem', position: 3, name: route.breadcrumb, item: `${ORIGIN}${route.path}` },
     ],
+  })
+}
+
+// Declares the site's name to Google's site-name feature, which is what prints
+// above the URL in a result. It has been printing "Haven" — the brand's name
+// before commit 7a3acf8 renamed it — because nothing on the site ever stated
+// the current one in a form Google reads for that purpose. Homepage only:
+// Google only looks at the root document for this.
+const website = ld({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${ORIGIN}/#website`,
+  url: `${ORIGIN}/`,
+  name: 'Solution Haven',
+  alternateName: ['Haven Solutions', 'SolutionHaven'],
+  publisher: { '@id': `${ORIGIN}/#organization` },
+  inLanguage: 'en-IN',
+})
+
+// The full service list as structured data. The homepage prose already says
+// this, but prose is summarised and the summary is what gets repeated — an
+// explicit six-item catalogue is much harder to compress down to "a tool for
+// CA firms" than a paragraph is. Generated from the same content.js the
+// Services section renders, so it can't fall out of date.
+const catalogue = ld({
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Solution Haven services',
+  itemListElement: services.tiles.map((tile, i) => ({
+    '@type': 'Offer',
+    position: i + 1,
+    itemOffered: {
+      '@type': 'Service',
+      name: tile.title,
+      description: tile.body,
+      category: tile.tag,
+      provider: { '@id': `${ORIGIN}/#organization` },
+      areaServed: { '@type': 'Country', name: 'India' },
+    },
+  })),
+})
+
+// isPartOf is the load-bearing bit: it says this page belongs to a larger
+// site rather than being the whole of it, so an industry page reads as one
+// of several rather than as the company's definition.
+function webpage(route) {
+  if (route.path === '/') return null
+  return ld({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${ORIGIN}${route.path}#webpage`,
+    url: `${ORIGIN}${route.path}`,
+    name: route.title,
+    description: route.description,
+    about: { '@type': 'Thing', name: route.about },
+    isPartOf: { '@id': `${ORIGIN}/#website` },
+    publisher: { '@id': `${ORIGIN}/#organization` },
+    inLanguage: 'en-IN',
   })
 }
 
@@ -80,6 +142,9 @@ function head(route) {
     `<meta property="og:url" content="${url}" />`,
     `<meta name="twitter:title" content="${title}" />`,
     `<meta name="twitter:description" content="${description}" />`,
+    route.path === '/' ? website : null,
+    route.path === '/' ? catalogue : null,
+    webpage(route),
     breadcrumbs(route),
     faqSchema(route),
   ]
