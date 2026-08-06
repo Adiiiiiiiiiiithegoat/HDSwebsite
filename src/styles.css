@@ -146,9 +146,9 @@ video {
 }
 
 .tone-green .lead {
-  /* Near-white rather than a muted grey: hierarchy comes from the size and
-     weight step, which the display face already carries. */
-  color: color-mix(in srgb, #fff 92%, transparent);
+  /* Full white, not a muted grey: hierarchy comes from the size and weight
+     step, which the display face already carries. */
+  color: #fff;
 }
 
 .tone-green .section-head {

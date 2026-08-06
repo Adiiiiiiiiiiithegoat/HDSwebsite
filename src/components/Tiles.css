@@ -53,7 +53,7 @@ a.tile:hover {
   color: var(--accent-strong);
   font-family: var(--mono);
   font-size: var(--fs-label);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -79,29 +79,39 @@ a.tile:hover .tile-cta .arrow {
   box-shadow: none;
 }
 
+/* Same legibility step as the light card, inverted: full --background rather
+   than the muted --text-on-dark. */
 .on-ink .tile-tag,
 .on-ink .tile p {
-  color: var(--text-on-dark);
+  color: var(--background);
 }
 
 .on-ink a.tile:hover {
   border-color: var(--accent);
 }
 
+/* Card text runs one step darker, larger and heavier than the muted body copy
+   elsewhere on the page: a card is a small block read at a glance, not a
+   paragraph, and --text-muted at --fs-sm was too faint inside one. */
 .tile-tag {
   font-family: var(--mono);
   font-size: var(--fs-label);
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text);
 }
 
 .tile h3 {
   margin: 0;
+  font-size: 1.3125rem;
 }
 
 .tile p {
-  color: var(--text-muted);
-  font-size: var(--fs-sm);
+  color: var(--text);
+  font-size: var(--fs-body);
+  /* 600, not 500 — index.html loads IBM Plex Sans at 400 and 600 only, so a
+     500 here would fall back to 400 and look identical to before. */
+  font-weight: 600;
   line-height: 1.6;
 }
