@@ -8,6 +8,10 @@
    ========================================================================== */
 
 :root {
+  /* The palette below is light-only; declaring it stops browsers and OS
+     auto-dark modes from re-tinting scrollbars and form controls against it. */
+  color-scheme: light;
+
   /* Colour — see DESIGN.md for the full contrast table. */
   --primary: #0f172a; /* dark section bg; heading/body text on light bg */
   --secondary: #1e293b; /* raised panels inside dark sections; hover step for primary fills */
