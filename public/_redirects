@@ -1,12 +1,14 @@
-# Deep links for the client routes in src/main.jsx. Deliberately NOT a `/*`
-# catch-all: that matched /assets/* too, so an asset request that missed at an
-# edge during a deploy came back as 200 text/html instead of a 404 — and the
-# /assets/* rule in _headers then marked that wrong answer `immutable` for a
-# year. Edge and browser cached an HTML document under a .css/.js URL, and
-# whoever hit that node got an unstyled page (stylesheet refused) or a blank
-# one (script refused) until the cache expired.
+# Deep links for the client routes in src/main.jsx, listed one by one.
 #
-# With no rule matching /assets/*, a miss is a real 404, which no browser will
-# apply as a stylesheet or cache as a valid asset. Unknown paths now get the
-# Pages 404 rather than being bounced to "/" by the router.
-/industries/*  /index.html  200
+# Deliberately NOT a `/*` catch-all: that matched /assets/* too, so an asset
+# request that missed at an edge during a deploy came back as 200 text/html
+# rather than a 404 — and the /assets/* rule in _headers then marked that wrong
+# answer `immutable` for a year. Edge and browser cached an HTML document under
+# a .css URL, and whoever hit that node got a completely unstyled page.
+#
+# Exact paths rather than /industries/*: the splat form did not match on Pages
+# (deep links 404'd once public/404.html removed the built-in SPA fallback that
+# had been quietly answering them). Two routes, so enumerating costs nothing.
+# Add a line here whenever a route is added to main.jsx.
+/industries/ca-firms  /index.html  200
+/industries/solar     /index.html  200
