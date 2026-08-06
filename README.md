@@ -27,7 +27,7 @@ src/content.js          every editable value — contact details, links, copy co
 src/styles.css          design tokens, type scale, all section styles
 src/App.jsx             single IntersectionObserver that drives every reveal + the stamp
 src/sections/           one file per section, in page order
-DESIGN.md               palette, contrast maths, type scale, seal-red budget
+DESIGN.md               palette, contrast maths, type scale, accent usage rules
 ```
 
 Change copy values in `src/content.js`. The only strings living inside components are
@@ -48,9 +48,11 @@ prose rather than config.
 
 ## Notes
 
-- Three seal-red elements on the page, deliberately: the CTA button style (hero +
-  contact `mailto:`), the stamp in the Proof section, the rule under the wordmark.
-  See DESIGN.md before adding a fourth.
+- The accent colour appears in three places, deliberately: the CTA button style (hero
+  + contact `mailto:`), the stamp in the Proof section, and the rule under the
+  wordmark. The button and stamp use `--accent-strong` (contrast-safe as text/fill on
+  a light background); the wordmark rule is a purely decorative flourish, so it uses
+  the raw `--accent`. See DESIGN.md for why those aren't interchangeable.
 - The stamp animates once, on first scroll into view. Under
   `prefers-reduced-motion: reduce` it renders already landed and nothing animates.
 - Verified with no horizontal overflow at 1440, 375 and 360px.

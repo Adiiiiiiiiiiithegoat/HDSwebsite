@@ -1,0 +1,63 @@
+/* New pattern — no FAQ/accordion exists on the CA page. Built from the same
+   tokens and hairline-rule language as the rest of the design system
+   (src/styles.css: --rule, --text-muted, --fs-h3, --fs-sm, .btn's 160ms ease
+   timing) rather than introducing a new visual idiom. Native <details> is
+   used for the disclosure so no JS state/animation library is needed —
+   consistent with the rest of the site (see docs/design-system-audit.md §3.8). */
+
+.faq-item {
+  border-bottom: 1px solid var(--rule);
+  padding-block: clamp(18px, 2.6vw, 24px);
+}
+
+.faq-item:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.faq-q {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  color: var(--primary);
+}
+
+.faq-q::-webkit-details-marker {
+  display: none;
+}
+
+.faq-q:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.faq-icon {
+  font-family: var(--mono);
+  font-size: 1.125rem;
+  color: var(--primary);
+  flex: none;
+  transition: transform 160ms ease;
+}
+
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-q:hover .faq-icon,
+.faq-item[open] .faq-icon {
+  color: var(--accent-strong);
+}
+
+.faq-a {
+  margin-top: 12px;
+  max-width: 62ch;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: 1.65;
+}

@@ -4,21 +4,26 @@
    ========================================================================== */
 
 :root {
-  /* Colour */
-  --ink-navy: #1b2a3a;
-  --ink-navy-2: #223447; /* raised panels inside dark sections */
-  --paper: #f7f5f0;
-  --paper-2: #fffdf8;
-  --ledger-green: #0e4d3c;
-  --seal-red: #b23a2e;
-  --filed-grey: #7a6f5d; /* rules and borders only — 4.53:1 on paper */
-  --filed-ink: #5c5346; /* secondary text — 6.93:1 on paper */
-  --text: #2b2b2b;
-  --paper-dim: #c9c2b4; /* secondary text on ink-navy — 8.24:1 */
+  /* Colour — see DESIGN.md for the full contrast table. */
+  --primary: #0f172a; /* dark section bg; heading/body text on light bg */
+  --secondary: #1e293b; /* raised panels inside dark sections; hover step for primary fills */
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --surface-sunken: #f1f5f9; /* one step down the same slate ladder as --background/--border —
+    the alternating "slate" section band, not a new colour */
+  --accent: #10b981; /* decorative only — on dark backgrounds, low-opacity washes, brand
+    flourishes. 2.5:1 against --background/--surface, so never used for text, icons or
+    button fills on a light surface (fails WCAG 3:1 and 4.5:1 alike). */
+  --accent-strong: #047857; /* accent darkened for AA text/icon/button-fill use on light
+    surfaces — 5.5:1 with white text, still clearly reads as the brand green */
+  --border: #e2e8f0; /* hairlines and borders only */
+  --text: #0f172a;
+  --text-muted: #475569; /* secondary text on light bg — 7.4:1 on --background */
+  --text-on-dark: #cbd5e1; /* secondary text on --primary/--secondary — 12:1 */
 
-  --rule: color-mix(in srgb, var(--filed-grey) 42%, transparent);
-  --rule-strong: color-mix(in srgb, var(--filed-grey) 70%, transparent);
-  --rule-dark: color-mix(in srgb, var(--paper-dim) 26%, transparent);
+  --rule: var(--border);
+  --rule-strong: color-mix(in srgb, var(--text-muted) 45%, var(--border) 55%);
+  --rule-dark: color-mix(in srgb, var(--text-on-dark) 26%, transparent);
 
   /* Type */
   --display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
@@ -53,7 +58,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--background);
   color: var(--text);
   font-family: var(--sans);
   font-size: var(--fs-body);
@@ -69,7 +74,7 @@ h3 {
   font-weight: 600;
   letter-spacing: -0.015em;
   font-variation-settings: 'opsz' 96;
-  color: var(--ink-navy);
+  color: var(--primary);
 }
 
 h3 {
@@ -95,13 +100,13 @@ video {
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink-navy);
+  outline: 2px solid var(--primary);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
 .on-ink :focus-visible {
-  outline-color: var(--paper);
+  outline-color: var(--background);
 }
 
 /* --- Shared utilities ---------------------------------------------------- */
@@ -115,6 +120,12 @@ video {
 
 .section {
   padding-block: var(--section-y);
+}
+
+/* Alternating section band — breaks up long runs of paper sections without
+   introducing a new colour (see --surface-sunken above). */
+.tone-slate {
+  background: var(--surface-sunken);
 }
 
 .measure {
@@ -132,31 +143,31 @@ video {
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--filed-ink);
+  color: var(--text-muted);
 }
 
 .on-ink .label {
-  color: var(--paper-dim);
+  color: var(--text-on-dark);
 }
 
 .lead {
   font-size: var(--fs-lead);
   line-height: 1.55;
-  color: var(--filed-ink);
+  color: var(--text-muted);
 }
 
 .on-ink {
-  background: var(--ink-navy);
-  color: var(--paper);
+  background: var(--primary);
+  color: var(--background);
 }
 
 .on-ink h2,
 .on-ink h3 {
-  color: var(--paper);
+  color: var(--background);
 }
 
 .on-ink .lead {
-  color: var(--paper-dim);
+  color: var(--text-on-dark);
 }
 
 .section-head {
@@ -172,16 +183,38 @@ video {
   border-bottom-color: var(--rule-dark);
 }
 
+/* Every section opens on the same small accent mark — a quiet, repeated
+   signature rather than a wash of colour. */
+.section-head .label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-head .label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-strong);
+  flex: none;
+}
+
+.on-ink .section-head .label::before {
+  background: var(--accent);
+}
+
 /* --- Buttons ------------------------------------------------------------- */
-/* Seal-red use #1 of 3. See DESIGN.md — do not add a fourth. */
+/* Primary action colour, site-wide. Fill is --accent-strong, not raw --accent —
+   raw accent is only 2.5:1 against white text (fails AA); accent-strong is 5.5:1. */
 
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 15px 26px;
-  border: 1px solid var(--seal-red);
-  background: var(--seal-red);
+  border: 1px solid var(--accent-strong);
+  background: var(--accent-strong);
   color: #fff;
   font-family: var(--sans);
   font-size: var(--fs-sm);
@@ -194,8 +227,8 @@ video {
 }
 
 .btn:hover {
-  background: #9c3226;
-  border-color: #9c3226;
+  background: #065f46;
+  border-color: #065f46;
 }
 
 .btn:active {
@@ -224,15 +257,15 @@ video {
   font-size: var(--fs-label);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--filed-ink);
+  color: var(--text-muted);
   text-decoration: none;
   border-bottom: 1px solid var(--rule-strong);
   padding-bottom: 3px;
 }
 
 .btn-quiet:hover {
-  color: var(--ink-navy);
-  border-bottom-color: var(--ink-navy);
+  color: var(--primary);
+  border-bottom-color: var(--primary);
 }
 
 /* --- Scroll reveal ------------------------------------------------------- */
@@ -256,7 +289,7 @@ video {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  background: color-mix(in srgb, var(--background) 88%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--rule);
 }
@@ -274,18 +307,25 @@ video {
   font-weight: 600;
   font-size: 1.375rem;
   letter-spacing: -0.02em;
-  color: var(--ink-navy);
+  color: var(--primary);
   text-decoration: none;
   padding-bottom: 3px;
-  /* Seal-red use #3 of 3: the signature rule under the wordmark. */
-  border-bottom: 2px solid var(--seal-red);
+  /* Brand flourish, decorative — not relied on for comprehension, so it can use
+     the raw (non-text-safe) accent value. */
+  border-bottom: 2px solid var(--accent);
   line-height: 1.1;
 }
 
 .nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: clamp(14px, 3vw, 32px);
+  /* Longer nav lists (General: 6 items, Solar: 5) can exceed the available
+     row width before the 620px header-wrap breakpoint kicks in — wrap
+     instead of overflowing. Harmless for the 3-item CA nav, which never
+     needs a second line. row-gap first, column-gap (the existing fluid
+     value) second, per the `gap` shorthand order. */
+  gap: 8px clamp(14px, 3vw, 32px);
 }
 
 .nav a {
@@ -293,15 +333,15 @@ video {
   font-size: var(--fs-label);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--filed-ink);
+  color: var(--text-muted);
   text-decoration: none;
   padding: 6px 0;
   border-bottom: 1px solid transparent;
 }
 
 .nav a:hover {
-  color: var(--ink-navy);
-  border-bottom-color: var(--ink-navy);
+  color: var(--accent-strong);
+  border-bottom-color: var(--accent-strong);
 }
 
 /* ==========================================================================
@@ -332,7 +372,7 @@ video {
 
 .hero-eyebrow span:not(:last-child)::after {
   content: ' ·';
-  color: var(--filed-grey);
+  color: var(--text-muted);
 }
 
 .hero-cta {
@@ -345,7 +385,7 @@ video {
 
 .hero-cta .note {
   font-size: var(--fs-sm);
-  color: var(--filed-ink);
+  color: var(--text-muted);
   max-width: 34ch;
 }
 
@@ -370,7 +410,7 @@ video {
   font-size: var(--fs-label);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--filed-ink);
+  color: var(--text-muted);
 }
 
 .hero-strip .v {
@@ -400,7 +440,7 @@ video {
 .video-slot {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: var(--ink-navy-2);
+  background: var(--secondary);
   border: 1px solid var(--rule-dark);
   border-radius: 2px;
   overflow: hidden;
@@ -422,24 +462,18 @@ video {
   gap: 16px;
   text-align: center;
   padding: 24px;
-  /* faint ruled-paper wash so an empty slot still reads as "document" */
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0 27px,
-    var(--rule-dark) 27px 28px
-  );
 }
 
 .video-poster .play {
   width: 62px;
   height: 62px;
   border-radius: 50%;
-  border: 1px solid var(--paper-dim);
+  border: 1px solid var(--text-on-dark);
   display: grid;
   place-items: center;
-  color: var(--paper);
+  color: var(--background);
   font-family: var(--mono);
-  background: color-mix(in srgb, var(--ink-navy) 70%, transparent);
+  background: color-mix(in srgb, var(--primary) 70%, transparent);
 }
 
 .video-poster .msg {
@@ -447,13 +481,13 @@ video {
   font-size: var(--fs-label);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--paper-dim);
+  color: var(--text-on-dark);
 }
 
 .proof-caption {
   margin-top: 18px;
   font-size: var(--fs-sm);
-  color: var(--paper-dim);
+  color: var(--text-on-dark);
   max-width: 64ch;
 }
 
@@ -468,7 +502,7 @@ video {
   border: 1px solid var(--rule-dark);
   border-radius: 2px;
   padding: 22px 22px 20px;
-  background: var(--ink-navy-2);
+  background: var(--secondary);
 }
 
 .ba-panel .ba-role {
@@ -476,7 +510,7 @@ video {
   font-size: var(--fs-label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--paper-dim);
+  color: var(--text-on-dark);
 }
 
 .ba-time {
@@ -485,14 +519,20 @@ video {
   font-weight: 500;
   line-height: 1.1;
   margin-top: 10px;
-  color: var(--paper);
+  color: var(--background);
   font-feature-settings: 'tnum' 1;
+}
+
+/* The "after" number is the whole point of the section — the one place on
+   the page where the accent is allowed to carry a large numeral. */
+.ba-after .ba-time {
+  color: var(--accent);
 }
 
 .ba-panel .ba-detail {
   margin-top: 8px;
   font-size: var(--fs-sm);
-  color: var(--paper-dim);
+  color: var(--text-on-dark);
 }
 
 .ba-after {
@@ -509,7 +549,7 @@ video {
   font-size: var(--fs-label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--paper-dim);
+  color: var(--text-on-dark);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -523,7 +563,7 @@ video {
   background: var(--rule-dark);
 }
 
-/* --- The stamp — seal-red use #2 of 3 ------------------------------------ */
+/* --- The stamp — coloured with --accent-strong, see src/sections/Stamp.jsx -- */
 
 .stamp {
   position: absolute;
@@ -574,13 +614,18 @@ video {
   gap: 8px 32px;
   padding-block: clamp(24px, 3.4vw, 36px);
   border-bottom: 1px solid var(--rule);
+  transition: background-color 160ms ease;
+}
+
+.step:hover {
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
 }
 
 .step-code {
   font-family: var(--mono);
   font-size: var(--fs-label);
   letter-spacing: 0.12em;
-  color: var(--filed-ink);
+  color: var(--accent-strong);
   padding-top: 5px;
 }
 
@@ -592,13 +637,13 @@ video {
 }
 
 .step-body p {
-  color: var(--filed-ink);
+  color: var(--text-muted);
 }
 
 .step-body .fact {
   font-family: var(--mono);
   font-size: var(--fs-sm);
-  color: var(--ledger-green);
+  color: var(--accent-strong);
   font-weight: 500;
 }
 
@@ -613,7 +658,7 @@ video {
 }
 
 .trust-block {
-  border-top: 2px solid var(--ledger-green);
+  border-top: 2px solid var(--accent-strong);
   padding-top: 22px;
   display: flex;
   flex-direction: column;
@@ -621,7 +666,7 @@ video {
 }
 
 .trust-block p {
-  color: var(--filed-ink);
+  color: var(--text-muted);
   max-width: 56ch;
 }
 
@@ -637,20 +682,44 @@ video {
   display: grid;
   grid-template-columns: 22px minmax(0, 1fr);
   gap: 10px;
-  color: var(--filed-ink);
+  color: var(--text-muted);
   font-size: var(--fs-sm);
 }
 
 .commit-list li::before {
   content: '✓';
   font-family: var(--mono);
-  color: var(--ledger-green);
+  color: var(--accent-strong);
   line-height: 1.6;
 }
 
 .commit-list strong {
   color: var(--text);
   font-weight: 600;
+}
+
+/* Dark-section variant — trust-grid/commit-list are reused on-ink (How We
+   Work, Why Choose Us); --accent-strong is tuned for light backgrounds and
+   goes muddy on --primary, so dark sections switch to the raw accent, which
+   DESIGN.md confirms is the 7:1-safe pairing for text/icons on dark bg. */
+.on-ink .trust-block {
+  border-top-color: var(--accent);
+}
+
+.on-ink .trust-block p {
+  color: var(--text-on-dark);
+}
+
+.on-ink .commit-list li {
+  color: var(--text-on-dark);
+}
+
+.on-ink .commit-list li::before {
+  color: var(--accent);
+}
+
+.on-ink .commit-list strong {
+  color: var(--background);
 }
 
 /* Case studies — hidden until real numbers exist (SHOW_CASE_STUDIES). */
@@ -665,7 +734,8 @@ video {
   border: 1px solid var(--rule);
   border-radius: 2px;
   padding: 22px;
-  background: var(--paper-2);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -676,19 +746,19 @@ video {
   font-size: var(--fs-label);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--filed-ink);
+  color: var(--text-muted);
 }
 
 .case-delta {
   font-family: var(--mono);
   font-size: 1.375rem;
-  color: var(--ink-navy);
+  color: var(--accent-strong);
   font-weight: 500;
 }
 
 .case-note {
   font-size: var(--fs-sm);
-  color: var(--filed-ink);
+  color: var(--text-muted);
 }
 
 /* ==========================================================================
@@ -722,7 +792,7 @@ video {
 .contact-line .val {
   font-family: var(--mono);
   font-size: var(--fs-body);
-  color: var(--paper);
+  color: var(--background);
   text-decoration: none;
   overflow-wrap: anywhere;
 }
@@ -743,7 +813,7 @@ video {
 .contact-line .val.plain {
   font-family: var(--sans);
   font-size: var(--fs-sm);
-  color: var(--paper-dim);
+  color: var(--text-on-dark);
   line-height: 1.55;
 }
 
@@ -758,9 +828,9 @@ video {
 }
 
 .footer-bar .wordmark {
-  color: var(--paper);
+  color: var(--background);
   font-size: 1.125rem;
-  /* seal-red stays in the header only — the footer bookend is a quiet rule */
+  /* accent stays in the header only — the footer bookend is a quiet rule */
   border-bottom-color: var(--rule-dark);
 }
 
@@ -772,19 +842,19 @@ video {
   font-family: var(--mono);
   font-size: var(--fs-label);
   letter-spacing: 0.08em;
-  color: var(--paper-dim);
+  color: var(--text-on-dark);
 }
 
 .footer-meta a {
-  color: var(--paper-dim);
+  color: var(--text-on-dark);
   text-decoration: none;
   border-bottom: 1px solid var(--rule-dark);
   padding-bottom: 2px;
 }
 
 .footer-meta a:hover {
-  color: var(--paper);
-  border-bottom-color: var(--paper);
+  color: var(--background);
+  border-bottom-color: var(--background);
 }
 
 .sr-only {
@@ -797,6 +867,32 @@ video {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* --- Skip link ------------------------------------------------------------ */
+/* Visually hidden until keyboard-focused, then pinned above everything else
+   so a keyboard/screen-reader user can jump straight past the header nav. */
+
+.skip-link {
+  position: fixed;
+  top: -48px;
+  left: 12px;
+  z-index: 50;
+  background: var(--primary);
+  color: var(--background);
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  padding: 12px 18px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: top 160ms ease;
+}
+
+.skip-link:focus-visible {
+  top: 12px;
+  outline: 2px solid var(--background);
+  outline-offset: 2px;
 }
 
 /* ==========================================================================
@@ -822,6 +918,11 @@ video {
 
   .nav {
     gap: 18px;
+  }
+
+  /* Larger vertical hit area for touch, without changing the visual density. */
+  .nav a {
+    padding-block: 10px;
   }
 
   /* Step code moves above the heading, hairline rules stay. */

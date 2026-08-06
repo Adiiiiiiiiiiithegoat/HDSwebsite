@@ -31,13 +31,13 @@ export default function Stamp() {
           <feGaussianBlur stdDeviation="1.6" />
         </filter>
         <g id="stamp-art">
-          <circle cx="60" cy="60" r="52" fill="none" stroke="#B23A2E" strokeWidth="3.5" />
-          <circle cx="60" cy="60" r="45" fill="none" stroke="#B23A2E" strokeWidth="1.2" />
+          <circle cx="60" cy="60" r="52" fill="none" stroke="#047857" strokeWidth="3.5" />
+          <circle cx="60" cy="60" r="45" fill="none" stroke="#047857" strokeWidth="1.2" />
           <text
             x="60"
             y="57"
             textAnchor="middle"
-            fill="#B23A2E"
+            fill="#047857"
             fontFamily="'IBM Plex Mono', monospace"
             fontSize="19"
             fontWeight="500"
@@ -45,12 +45,12 @@ export default function Stamp() {
           >
             FILED
           </text>
-          <line x1="30" y1="66" x2="90" y2="66" stroke="#B23A2E" strokeWidth="1.2" />
+          <line x1="30" y1="66" x2="90" y2="66" stroke="#047857" strokeWidth="1.2" />
           <text
             x="60"
             y="80"
             textAnchor="middle"
-            fill="#B23A2E"
+            fill="#047857"
             fontFamily="'IBM Plex Mono', monospace"
             fontSize="8.5"
             letterSpacing="1.4"

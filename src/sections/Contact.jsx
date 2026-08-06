@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { contact, legal } from '../content.js'
 
 // No form and no backend — this section is contact details only.
@@ -56,9 +57,9 @@ export default function Contact() {
 
       <div className="wrap">
         <div className="footer-bar">
-          <a className="wordmark" href="#main">
+          <Link className="wordmark" to="/">
             Haven
-          </a>
+          </Link>
           <div className="footer-meta">
             <span>
               &copy; {legal.year} {legal.entity}

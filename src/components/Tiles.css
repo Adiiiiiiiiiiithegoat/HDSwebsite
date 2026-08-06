@@ -1,0 +1,68 @@
+/* Generic content-tile grid — modeled on the CA page's `.case` card (border +
+   2px radius + one-step-up background, no shadow, see
+   docs/design-system-audit.md §3.4) but generalized for icon+title+body
+   content (Services, Industries, Why Choose Us) rather than a metric card.
+   New classnames, no collision with styles.css. */
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(18px, 2.6vw, 24px);
+}
+
+.tile {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 26px 24px;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 160ms ease;
+  /* .tile can render as an <a> (Industries → CA Firms) — match the site's
+     convention of resetting anchor decoration explicitly (see .btn, .nav a,
+     .footer-meta a in src/styles.css) rather than relying on inheritance. */
+  color: inherit;
+  text-decoration: none;
+}
+
+a.tile:hover {
+  border-color: var(--accent-strong);
+}
+
+/* Dark-section variant (Section `dark` prop) — a card needs to read as
+   raised against --primary, same raised-panel colour as .video-slot /
+   .ba-panel in src/styles.css, not the light --surface card. */
+.on-ink .tile {
+  background: var(--secondary);
+  border-color: var(--rule-dark);
+  box-shadow: none;
+}
+
+.on-ink .tile-tag,
+.on-ink .tile p {
+  color: var(--text-on-dark);
+}
+
+.on-ink a.tile:hover {
+  border-color: var(--accent);
+}
+
+.tile-tag {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.tile h3 {
+  margin: 0;
+}
+
+.tile p {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
