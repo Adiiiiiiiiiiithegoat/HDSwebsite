@@ -1,6 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-  <rect width="16" height="16" rx="3.2" fill="#0F172A" />
-  <rect x="3" y="8" width="2" height="4" fill="#F8FAFC" />
-  <rect x="7" y="5" width="2" height="7" fill="#F8FAFC" />
-  <rect x="11" y="2" width="2" height="10" fill="#F8FAFC" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Bars sit on a common baseline at y=49, 8 wide with 5 between them, so the
+       block of three is centred. Proportions measured off the source artwork;
+       the PNG and .ico variants are generated from the same ratios. Square
+       corners, not rounded — iOS and Android round their own. -->
+  <rect width="64" height="64" fill="#0F172A" />
+  <rect x="15" y="36" width="8" height="13" fill="#FFFFFF" />
+  <rect x="28" y="28" width="8" height="21" fill="#FFFFFF" />
+  <rect x="41" y="16" width="8" height="33" fill="#10B981" />
 </svg>
