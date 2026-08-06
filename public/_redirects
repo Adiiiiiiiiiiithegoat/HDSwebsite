@@ -1,8 +1,12 @@
-# SPA catch-all: every path serves index.html and react-router takes over.
+# Build assets resolve to themselves and stop here. First match wins, so this
+# keeps /assets/* from ever reaching the SPA catch-all below.
 #
-# Note this also swallows a request for a missing /assets/* file, handing back
-# index.html with a 200. That used to blank the page (a stale chunk request got
-# HTML the browser would not run as a module) — Pages ignores a 404 status here,
-# so the fix was structural instead: main.jsx imports its routes statically, so
-# nothing is fetched at runtime that index.html did not already name.
+# Without it, an asset request that misses (a hash not yet live at an edge
+# during a deploy) fell through to index.html and came back as 200 text/html —
+# which _headers then stamped `immutable, max-age=31536000`. The edge and the
+# browser cached an HTML document under a .css/.js URL for a year, so the page
+# rendered with no stylesheet, or no script at all, for whoever hit that node.
+/assets/*  /assets/:splat  200
+
+# SPA: every other path serves index.html and react-router takes over.
 /*  /index.html  200
