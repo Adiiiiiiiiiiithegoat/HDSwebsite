@@ -5,8 +5,11 @@
 
 // --- Contact ---------------------------------------------------------------
 // No form, no backend. These are the only ways in.
+// A list, not a single address — every page renders all of them, so adding a
+// third here puts it everywhere at once. First one is the default `mailto:`
+// target for buttons.
 export const contact = {
-  email: 'aditya@solutionhaven.net',
+  emails: ['aditya@solutionhaven.net', 'siddhartha@solutionhaven.net'],
   phones: [
     { number: '+91 88797 60718', href: 'https://wa.me/918879760718' },
     { number: '+91 83830 79928', href: 'https://wa.me/918383079928' },
@@ -23,22 +26,6 @@ export const legal = {
 // --- Timelines and figures quoted in copy ----------------------------------
 export const demoTurnaround = '3–5 business days'
 export const discoveryCallLength = '15–20 minutes'
-
-// --- Proof section ---------------------------------------------------------
-// TODO: drop the real screen recording at public/demo/gstr1-fill.mp4 and a
-// poster frame at public/demo/gstr1-poster.jpg, then set `videoSrc`/`poster`.
-export const proof = {
-  videoSrc: null, // e.g. '/demo/gstr1-fill.mp4'
-  poster: null, // e.g. '/demo/gstr1-poster.jpg'
-  form: 'GSTR-1',
-  manual: '45 min',
-  automated: '90 sec',
-  invoices: '312',
-  caption:
-    'GSTR-1 for a trading client, 312 B2B invoices exported from Tally as an Excel sheet. ' +
-    'Timed from opening the file to a JSON ready for upload on the GST portal. ' +
-    'The manual figure is the same work done by hand by an article assistant.',
-}
 
 // --- Trust: case studies ---------------------------------------------------
 // Built and data-driven, hidden until there is something true to put in it.

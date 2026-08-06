@@ -519,191 +519,6 @@ video {
 }
 
 /* ==========================================================================
-   Proof — the one dark section
-   ========================================================================== */
-
-/* The stamp overshoots its panel while landing. Clip on the x axis only, at
-   the section edge, so the page never gains a horizontal scrollbar; the
-   stamp's overhang below the panel stays visible. */
-#proof .wrap {
-  overflow-x: clip;
-}
-
-.proof-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  gap: clamp(28px, 4vw, 52px);
-  align-items: start;
-}
-
-/* Video slot — real recording drops in here, see src/content.js `proof`. */
-.video-slot {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  background: var(--secondary);
-  border: 1px solid var(--rule-dark);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.video-slot video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.video-poster {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  text-align: center;
-  padding: 24px;
-}
-
-.video-poster .play {
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  border: 1px solid var(--text-on-dark);
-  display: grid;
-  place-items: center;
-  color: var(--background);
-  font-family: var(--mono);
-  background: color-mix(in srgb, var(--primary) 70%, transparent);
-}
-
-.video-poster .msg {
-  font-family: var(--mono);
-  font-size: var(--fs-label);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-on-dark);
-}
-
-.proof-caption {
-  margin-top: 18px;
-  font-size: var(--fs-sm);
-  color: var(--text-on-dark);
-  max-width: 64ch;
-}
-
-/* Before / after */
-
-.ba {
-  display: grid;
-  gap: 14px;
-}
-
-.ba-panel {
-  border: 1px solid var(--rule-dark);
-  border-radius: 2px;
-  padding: 22px 22px 20px;
-  background: var(--secondary);
-}
-
-.ba-panel .ba-role {
-  font-family: var(--mono);
-  font-size: var(--fs-label);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-on-dark);
-}
-
-.ba-time {
-  font-family: var(--mono);
-  font-size: clamp(2rem, 5.5vw, 2.75rem);
-  font-weight: 500;
-  line-height: 1.1;
-  margin-top: 10px;
-  color: var(--background);
-  font-feature-settings: 'tnum' 1;
-}
-
-/* The "after" number is the whole point of the section — the one place on
-   the page where the accent is allowed to carry a large numeral. */
-.ba-after .ba-time {
-  color: var(--accent);
-}
-
-.ba-panel .ba-detail {
-  margin-top: 8px;
-  font-size: var(--fs-sm);
-  color: var(--text-on-dark);
-}
-
-.ba-after {
-  position: relative;
-}
-
-/* keep the detail line clear of the stamp */
-.ba-after .ba-detail {
-  padding-right: 104px;
-}
-
-.ba-delta {
-  font-family: var(--mono);
-  font-size: var(--fs-label);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-on-dark);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.ba-delta::before,
-.ba-delta::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--rule-dark);
-}
-
-/* --- The stamp — coloured with --accent-strong, see src/sections/Stamp.jsx -- */
-
-.stamp {
-  position: absolute;
-  right: -14px;
-  bottom: -26px;
-  z-index: 2;
-  width: 132px;
-  height: 132px;
-  pointer-events: none;
-  transform: rotate(-11deg) scale(1.55);
-  opacity: 0;
-}
-
-.stamp.is-in {
-  animation: stamp-down 380ms cubic-bezier(0.2, 0.9, 0.3, 1.35) forwards;
-}
-
-@keyframes stamp-down {
-  from {
-    transform: rotate(-11deg) scale(1.55);
-    opacity: 0;
-  }
-  70% {
-    transform: rotate(-11deg) scale(0.96);
-    opacity: 0.92;
-  }
-  to {
-    transform: rotate(-11deg) scale(1);
-    opacity: 0.92;
-  }
-}
-
-@media (min-width: 700px) {
-  .stamp {
-    width: 148px;
-    height: 148px;
-  }
-}
-
-/* ==========================================================================
    Process
    ========================================================================== */
 
@@ -875,6 +690,31 @@ video {
   margin-top: clamp(36px, 5vw, 52px);
 }
 
+/* Addresses printed under the CTA button on the General and Solar pages. The
+   button is a mailto:, and a browser with no mail handler answers one by
+   opening a blank tab — so the address has to be on the page, selectable,
+   whether or not the button does anything. */
+.cta-emails {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-family: var(--mono);
+  font-size: var(--fs-sm);
+}
+
+.cta-emails a {
+  color: var(--background);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-dark);
+  padding-bottom: 2px;
+  overflow-wrap: anywhere;
+}
+
+.cta-emails a:hover {
+  border-bottom-color: var(--background);
+}
+
 .contact-line {
   display: flex;
   flex-direction: column;
@@ -999,12 +839,6 @@ video {
    Responsive
    ========================================================================== */
 
-@media (max-width: 860px) {
-  .proof-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
 @media (max-width: 620px) {
   :root {
     --fs-body: 1rem;
@@ -1057,12 +891,6 @@ video {
     padding-top: 0;
   }
 
-  /* stamp tucks inside the panel — hanging off the edge would push the page
-     wider than the viewport at small widths */
-  .stamp {
-    right: 6px;
-    bottom: -18px;
-  }
 
   .footer-bar {
     flex-direction: column;
@@ -1086,16 +914,6 @@ video {
     justify-content: space-between;
   }
 
-  .stamp {
-    width: 100px;
-    height: 100px;
-    right: 4px;
-    bottom: -16px;
-  }
-
-  .ba-after .ba-detail {
-    padding-right: 74px;
-  }
 }
 
 /* ==========================================================================
@@ -1120,9 +938,4 @@ video {
     transform: none;
   }
 
-  .stamp {
-    opacity: 0.92;
-    transform: rotate(-11deg) scale(1);
-    animation: none !important;
-  }
 }

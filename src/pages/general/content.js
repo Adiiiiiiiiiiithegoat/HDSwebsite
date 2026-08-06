@@ -7,7 +7,7 @@
 
 // Matches src/content.js `contact.email` — same company, one inbox.
 export const contact = {
-  email: 'aditya@solutionhaven.net',
+  emails: ['aditya@solutionhaven.net', 'siddhartha@solutionhaven.net'],
 }
 
 export const legal = {
@@ -167,13 +167,13 @@ export const services = {
 export const industries = {
   tiles: [
     {
-      tag: 'Professional services',
+      tag: 'CA firms',
       title: 'CA & Accounting Firms',
       body: 'Automation for the returns, reconciliations and filings a firm handles every month.',
       href: '/industries/ca-firms',
     },
     {
-      tag: 'Energy',
+      tag: 'Solar',
       title: 'Solar & renewables',
       body: 'Site data, compliance paperwork and reporting workflows that scale faster than the team tracking them by hand.',
       href: '/industries/solar',

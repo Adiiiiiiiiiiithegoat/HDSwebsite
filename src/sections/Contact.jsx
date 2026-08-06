@@ -3,7 +3,10 @@ import { contact, legal } from '../content.js'
 
 // No form and no backend — this section is contact details only.
 const LINES = [
-  { label: 'Email', href: `mailto:${contact.email}`, value: contact.email },
+  {
+    label: 'Email',
+    links: contact.emails.map((e) => ({ number: e, href: `mailto:${e}` })),
+  },
   { label: 'WhatsApp or call', links: contact.phones },
 ]
 
@@ -28,7 +31,15 @@ export default function Contact() {
               {l.links ? (
                 <span className="val-group">
                   {l.links.map((k) => (
-                    <a key={k.href} href={k.href} target="_blank" rel="noreferrer">
+                    // mailto: must not open a new tab — a browser with no mail
+                    // handler leaves that tab blank, which reads as a dead link.
+                    <a
+                      key={k.href}
+                      href={k.href}
+                      {...(k.href.startsWith('mailto:')
+                        ? {}
+                        : { target: '_blank', rel: 'noreferrer' })}
+                    >
                       {k.number}
                     </a>
                   ))}
@@ -47,7 +58,7 @@ export default function Contact() {
           ))}
         </div>
 
-        <a className="btn contact-cta" href={`mailto:${contact.email}`} data-reveal>
+        <a className="btn contact-cta" href={`mailto:${contact.emails[0]}`} data-reveal>
           Email us one form you fill every month
           <span className="arrow" aria-hidden="true">
             &rarr;
