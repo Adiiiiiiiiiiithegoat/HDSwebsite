@@ -1,5 +1,8 @@
-# Missing build assets must 404, not fall through to the SPA rule below — that
-# served index.html with a 200 for a stale /assets/*.js request, so the browser
-# tried to parse HTML as JavaScript and the page died with no failure to detect.
-/assets/*  /index.html  404
+# SPA catch-all: every path serves index.html and react-router takes over.
+#
+# Note this also swallows a request for a missing /assets/* file, handing back
+# index.html with a 200. That used to blank the page (a stale chunk request got
+# HTML the browser would not run as a module) — Pages ignores a 404 status here,
+# so the fix was structural instead: main.jsx imports its routes statically, so
+# nothing is fetched at runtime that index.html did not already name.
 /*  /index.html  200
