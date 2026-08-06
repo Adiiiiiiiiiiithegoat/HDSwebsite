@@ -26,8 +26,8 @@ dedicated pages so far.
 
 ## How an engagement starts
 
-A free Business Workflow Assessment on one process of the client's choice,
-taking 2–3 business days, before any commitment. Discovery call is 20–30
+A Business Workflow Assessment on one process of the client's choice, taking
+2–3 business days, before anything gets built. Discovery call is 20–30
 minutes. If the right fix is a process change rather than software, that is
 what gets said on the call.
 

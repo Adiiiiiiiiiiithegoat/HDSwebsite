@@ -9,8 +9,8 @@ export default function Process() {
       <SectionHead
         label="Our process"
         titleId="process-title"
-        title="You see it working before you commit to it."
-        lead="Five steps. The first two cost you nothing but a call and the time to walk us through one workflow."
+        title="We understand the workflow before we recommend anything."
+        lead="Five steps, from understanding how the business runs to measuring the result. The first two are a conversation and a close look at one workflow."
       />
       <Steps items={process.steps} />
     </Section>

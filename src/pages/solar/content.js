@@ -33,7 +33,7 @@ export const hero = {
   eyebrow: ['Site surveys', 'CEIG & DISCOM approvals', 'Multi-state compliance', 'Procurement & O&M'],
   h1: 'Helping Solar EPC Companies Improve Operations with AI, Automation & Software',
   lead: 'Every Solar EPC company runs a different mix of rooftop, open-access and government-scheme work — different regulators, different documents, different bottlenecks. We map how yours actually runs, then apply AI, automation or software only where it removes real work.',
-  ctaNote: `Free Business Workflow Assessment on one process of your choice, before any commitment.`,
+  ctaNote: `A Business Workflow Assessment on one process of your choice, before anything gets built.`,
   strip: [
     {
       k: 'Two delivery pathways',
@@ -189,7 +189,7 @@ export const approach = {
     {
       title: 'Recommend',
       fact: 'Technology fitted to the problem.',
-      body: 'We recommend the smallest fix that solves it — automation, integration, existing software, or a custom build — and price it before work starts.',
+      body: 'We recommend the smallest fix that solves it — automation, integration, existing software, or a custom build. If something that already exists does the job well, that is what we say.',
     },
     {
       title: 'Build',
@@ -224,11 +224,11 @@ export const faq = {
     },
     {
       q: 'What does the Business Workflow Assessment involve?',
-      a: `We spend time inside one workflow you choose — the one costing the most time — and document exactly where it breaks down. The first workflow is free, before you commit to anything further.`,
+      a: `We spend time inside one workflow you choose — the one taking the most time — and document exactly where it breaks down, before anything gets built.`,
     },
     {
       q: 'How long does an assessment take?',
-      a: `${assessmentLength} for the assessment itself. Build timelines depend on scope and are quoted afterward, once we know what’s actually being built.`,
+      a: `${assessmentLength} for the assessment itself. Build timelines depend on scope and are agreed afterward, once we know what’s actually being built — if anything needs building at all.`,
     },
   ],
 }

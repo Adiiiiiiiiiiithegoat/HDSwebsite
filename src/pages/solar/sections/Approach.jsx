@@ -10,7 +10,7 @@ export default function Approach() {
         label="Our approach"
         titleId="approach-title"
         title="Understand. Analyze. Recommend. Build. Improve."
-        lead="You see it working before you commit to it — the first two steps cost you nothing but a call and the time to walk us through one workflow."
+        lead="You see it working before you commit to it — the first two steps are a conversation and a close look at one workflow."
       />
       <Steps items={approach.steps} codePrefix="PHASE" />
     </Section>

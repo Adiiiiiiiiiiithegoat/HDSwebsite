@@ -171,6 +171,27 @@ video {
   outline-color: #fff;
 }
 
+/* The primary button's --accent-strong fill IS this band's background, so a
+   .btn placed here would be invisible. Inside the band only, the fill steps to
+   --primary — an existing token and the same navy used by the dark sections,
+   not a second button style. White on --primary is 16:1, and the navy reads
+   3.2:1 against the green, over the 3:1 WCAG floor for a UI component edge. */
+.tone-green .btn {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.tone-green .btn:hover {
+  background: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.industry-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 .measure {
   max-width: 62ch;
 }

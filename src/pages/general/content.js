@@ -23,7 +23,7 @@ export const hero = {
   h1: 'We eliminate the bottlenecks slowing your business down.',
   lead: 'Solution Haven finds where your operations actually break — manual work, disconnected tools, a process nobody owns — and fixes it with AI, automation and custom software built around how your business runs. We don’t sell software. We solve the problem underneath it.',
   ctaNote:
-    'Free Business Workflow Assessment on one process of your choice, before any commitment.',
+    'A Business Workflow Assessment on one process of your choice, before anything gets built.',
   strip: [
     {
       k: 'Manual work',
@@ -87,45 +87,45 @@ export const process = {
   steps: [
     {
       title: 'Discovery call',
-      fact: `Free · ${discoveryCallLength}`,
-      body: 'We ask what’s slow, what’s manual, and where the team loses time every week. There is no pitch on this call.',
+      fact: discoveryCallLength,
+      body: 'We ask how the business runs, what you’re trying to achieve, and where the team loses time every week. There is no pitch on this call.',
     },
     {
       title: 'Business Workflow Assessment',
       fact: `Structured · ${assessmentLength}`,
-      body: 'We map one workflow in detail — every handoff, every manual step — and show you where it’s actually costing time and money.',
+      body: 'We map how the company actually operates — every handoff, every manual step — and identify where the real bottlenecks are.',
     },
     {
-      title: 'Recommendation and scope',
-      fact: 'Price agreed before the build',
-      body: 'We recommend the smallest fix that solves the problem — automation, integration, or custom software — and put a number on it before work starts.',
+      title: 'Recommendation',
+      fact: 'The simplest fix that works',
+      body: 'We recommend the simplest, highest-impact solution. If software that already exists solves the problem well, that is what we recommend — we don’t build something new just because we can.',
     },
     {
-      title: 'Build and test',
-      fact: 'Built on your real workflow',
-      body: 'We build against your actual process, not a demo environment, and you test the output before anything goes live.',
+      title: 'Implementation',
+      fact: 'Only when a build adds value',
+      body: 'Only if a custom solution is genuinely the right choice. We build against your actual process, not a demo environment, and you test the output before anything goes live.',
     },
     {
-      title: 'Deploy and support',
-      fact: 'Maintained, not abandoned',
-      body: 'Rollout, training for the team who’ll use it, and support as the process or the tools around it change — that’s part of the engagement, not a separate call.',
+      title: 'Continuous improvement',
+      fact: 'Measured, not assumed',
+      body: 'We measure the result against the bottleneck we set out to remove, and keep improving as the process and the tools around it change.',
     },
   ],
 }
 
 export const assessment = {
-  lead: 'We spend time inside one workflow you choose — the one costing you the most time or money — and document exactly where it breaks down.',
+  lead: 'We spend time inside one workflow you choose — the one taking the most time — and document exactly where it breaks down.',
   includes: [
     'A step-by-step map of the workflow as it actually runs, not as it’s supposed to run.',
     'Every manual step, handoff and delay identified and timed.',
     'A written recommendation — automate, integrate, build, or leave it alone.',
-    'An estimate of the time and cost the current process is carrying.',
+    'An estimate of the time the current process is carrying.',
   ],
   strip: [
     { k: 'Scope', v: 'One workflow, chosen by you.' },
     { k: 'Timeline', v: assessmentLength },
     { k: 'Format', v: 'Working session, then a written report.' },
-    { k: 'Cost', v: 'Free for the first workflow.' },
+    { k: 'Outcome', v: 'A written recommendation — build or no build.' },
   ],
 }
 
@@ -197,7 +197,7 @@ export const whyChooseUs = {
     },
     {
       strong: 'We stay on after launch.',
-      rest: 'Support and iteration are part of the engagement, not an upsell.',
+      rest: 'Support and iteration are part of the engagement, not an afterthought.',
     },
   ],
   note: {
@@ -218,11 +218,11 @@ export const faq = {
     },
     {
       q: 'What if the answer isn’t AI or automation?',
-      a: 'We’ll tell you. Not every bottleneck needs software — some need a process change, and we’ll point that out on the assessment call at no cost.',
+      a: 'We’ll tell you. Not every bottleneck needs software — some need a process change, and we’ll point that out on the assessment call.',
     },
     {
-      q: 'What does the Business Workflow Assessment cost?',
-      a: 'The first workflow is free. We use it to show you exactly where the process breaks down before you commit to anything further.',
+      q: 'What if software that already exists solves our problem?',
+      a: 'Then that is what we recommend, and we’ll help you put it in place. We don’t build something custom unless it genuinely does more for you than what is already available — the assessment is what tells us which of the two it is.',
     },
     {
       q: 'Do we need our own technical team to work with you?',
@@ -230,7 +230,7 @@ export const faq = {
     },
     {
       q: 'How long does a typical engagement take?',
-      a: 'The assessment runs a few business days. Build timelines depend on scope and are quoted before work starts, once the assessment is done.',
+      a: 'The assessment runs a few business days. Build timelines depend on scope and are agreed once the assessment is done — assuming a build is the right answer at all.',
     },
     {
       q: 'What industries do you work with?',
