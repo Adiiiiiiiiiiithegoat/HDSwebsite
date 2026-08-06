@@ -17,7 +17,7 @@ export default function Industries() {
         title="The method is the same. The bottlenecks are industry-specific."
         lead="The sectors we work in today — CA Firms and Solar & Renewables — with the same assessment-first approach behind both."
       />
-      <div className="industry-actions" data-reveal>
+      <div className="industry-panel" data-reveal>
         {industries.tiles.map((tile) => (
           <div className="industry-item" key={tile.href}>
             <p>{tile.body}</p>

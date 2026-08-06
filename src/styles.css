@@ -171,27 +171,20 @@ video {
   outline-color: #fff;
 }
 
-/* The primary button's --accent-strong fill IS this band's background, so a
-   .btn placed here would be invisible. Inside the band only, the fill steps to
-   --primary — an existing token and the same navy used by the dark sections,
-   not a second button style. White on --primary is 16:1, and the navy reads
-   3.2:1 against the green, over the 3:1 WCAG floor for a UI component edge. */
-.tone-green .btn {
+/* Both industries share one navy panel on the green band. The buttons inside
+   keep the stock --accent-strong fill: green on navy is the same pairing every
+   other dark section uses, so no button override is needed here — which is why
+   the .tone-green .btn navy variant that the earlier loose layout required is
+   gone rather than left behind unused.
+   Two-up grid inside, same auto-fit/260px the tile cards used. */
+.industry-panel {
   background: var(--primary);
-  border-color: var(--primary);
-}
-
-.tone-green .btn:hover {
-  background: var(--secondary);
-  border-color: var(--secondary);
-}
-
-/* Same two-up grid the tile cards used, so the section keeps its old shape —
-   the description is just no longer inside a white card. */
-.industry-actions {
+  color: var(--background);
+  border-radius: 2px;
+  padding: clamp(26px, 4vw, 44px);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: clamp(18px, 2.6vw, 24px) clamp(24px, 4vw, 48px);
+  gap: clamp(26px, 4vw, 48px);
 }
 
 /* align-items: flex-start keeps the button at its natural width instead of
