@@ -16,7 +16,7 @@ export const contact = {
 export const legal = {
   privacyHref: '#', // TODO
   termsHref: '#', // TODO
-  entity: 'Haven',
+  entity: 'Solution Haven',
   year: new Date().getFullYear(),
 }
 

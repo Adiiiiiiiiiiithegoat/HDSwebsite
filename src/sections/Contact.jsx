@@ -58,7 +58,7 @@ export default function Contact() {
       <div className="wrap">
         <div className="footer-bar">
           <Link className="wordmark" to="/">
-            Haven
+            Solution Haven
           </Link>
           <div className="footer-meta">
             <span>

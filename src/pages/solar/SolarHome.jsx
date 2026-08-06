@@ -12,6 +12,7 @@ import FAQSection from './sections/FAQSection.jsx'
 import CTA from './sections/CTA.jsx'
 
 const NAV = [
+  { label: '← Home', href: '/' },
   { label: 'Workflow', href: '#workflow' },
   { label: 'Bottlenecks', href: '#bottlenecks' },
   { label: 'Approach', href: '#approach' },

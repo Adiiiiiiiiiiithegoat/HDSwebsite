@@ -1,7 +1,7 @@
 import useRouteMeta from '../hooks/useRouteMeta.js'
 import App from '../App.jsx'
 
-const TITLE = 'Haven — automation for Indian CA firms'
+const TITLE = 'Solution Haven — automation for Indian CA firms'
 const DESCRIPTION =
   'We build automation for the forms your firm files every month — GSTR-1, GSTR-3B, 26Q, AOC-4. Working demo on your own workflow in 3–5 business days, before you pay anything.'
 

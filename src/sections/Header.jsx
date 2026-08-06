@@ -12,10 +12,11 @@ export default function Header() {
       </a>
       <header className="header">
         <div className="wrap header-inner">
-          <Link className="wordmark" to="/" aria-label="Haven — back to Solution Haven">
-            Haven
+          <Link className="wordmark" to="/" aria-label="Solution Haven — back to the homepage">
+            Solution Haven
           </Link>
           <nav className="nav" aria-label="Sections">
+            <Link to="/">&larr; Home</Link>
             <a href="#proof">Proof</a>
             <a href="#process">Process</a>
             <a href="#contact">Contact</a>

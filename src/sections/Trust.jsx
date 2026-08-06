@@ -74,7 +74,7 @@ export default function Trust() {
           <div className="trust-block" data-reveal>
             <h3>We only build for this</h3>
             <p>
-              Haven works on Indian compliance work and nothing else. That is a
+              Solution Haven works on Indian compliance work and nothing else. That is a
               limitation we chose. It means we already know that GSTR-1 and 3B are not
               the same job, that 26Q and 24Q need different validation, that September
               and October are not normal months, and that an AOC-4 attachment fails for
