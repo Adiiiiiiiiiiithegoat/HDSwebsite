@@ -1,6 +1,6 @@
 import { demoTurnaround } from '../content.js'
 
-const FORMS = ['GSTR-1', 'GSTR-3B', '26Q', '24Q', 'AOC-4', 'ITR-3']
+const FORMS = ['GSTR-1', 'GSTR-3B', 'AOC-4']
 
 const STRIP = [
   {

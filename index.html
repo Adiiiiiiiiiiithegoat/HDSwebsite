@@ -114,6 +114,23 @@
     </script>
   </head>
   <body>
+    <!--email_off-->
+    <!-- Cloudflare's Scrape Shield "Email Address Obfuscation" rewrites every
+         mailto: in an HTML response to /cdn-cgi/l/email-protection#<hex> and
+         swaps the visible address for a [email protected] span, then injects a
+         script to undo both in the browser.
+
+         That breaks this site specifically: the prerendered routes are mounted
+         with hydrateRoot, and React hydration trusts the server DOM rather than
+         re-checking attributes, so the rewritten href is never restored. The
+         contact buttons navigated to /cdn-cgi/... and opened a blank page.
+
+         The email_off / email_on comment pair above and at the end of the body
+         is Cloudflare's documented opt-out for a region of the document. It
+         wraps everything rendered, so nothing gets rewritten. The equivalent
+         permanent fix is turning the feature off under Scrape Shield in the
+         Cloudflare dashboard. -->
+
     <!-- scripts/prerender.mjs replaces this marker with the whole page, already
          rendered to HTML, so there is nothing blank to paint over while the JS
          downloads and a crawler that doesn't run JS still gets the full text.
@@ -130,5 +147,6 @@
       </div>
     </noscript>
     <script type="module" src="/src/main.jsx"></script>
+    <!--email_on-->
   </body>
 </html>

@@ -34,7 +34,7 @@ export const CA_FIRMS = {
   path: '/industries/ca-firms',
   title: 'GST & TDS Filing Automation for CA Firms | Solution Haven',
   description:
-    'Automation for the returns your firm files every month — GSTR-1, GSTR-3B, 26Q, AOC-4. A working demo on your own workflow in 3–5 business days.',
+    'Automation for the returns your firm files every month — GSTR-1, GSTR-3B, AOC-4. A working demo on your own workflow in 3–5 business days.',
   // Fed to the page's WebPage.about, which is how a machine reader learns
   // this page covers one industry rather than defining the company.
   about: 'Accounting practice automation for Indian chartered accountancy firms',

@@ -37,7 +37,7 @@ what gets said on the call.
   works, process, FAQ.
 - [CA firms](https://solutionhaven.net/industries/ca-firms): automation for
   the returns an Indian chartered accountancy firm files monthly — GSTR-1,
-  GSTR-3B, 26Q, AOC-4.
+  GSTR-3B, AOC-4.
 - [Solar EPC](https://solutionhaven.net/industries/solar): operations for
   rooftop net metering, open access and government-scheme solar work —
   site surveys, CEIG and DISCOM approvals, multi-state compliance,

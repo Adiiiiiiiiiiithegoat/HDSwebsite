@@ -84,7 +84,7 @@ Scale:
 Five sections. No pricing section and no form — the site is a static landing page
 with contact details only, no backend of any kind.
 
-1. **Hero** — background. Mono eyebrow listing real forms (`GSTR-1 · GSTR-3B · 26Q · AOC-4`). h1 names the pain. One accent CTA → `#contact`. Below: a thin ruled strip of "what we automate" in mono, comma-free, no icons.
+1. **Hero** — background. Mono eyebrow listing real forms (`GSTR-1 · GSTR-3B · AOC-4`). h1 names the pain. One accent CTA → `#contact`. Below: a thin ruled strip of "what we automate" in mono, comma-free, no icons.
 2. **Proof** — dark (`--primary`), full-bleed. Two-column desktop / stacked mobile: 16:9 video slot (poster treatment, play affordance, `TODO` marker for the file) + a before/after stat block in mono (`45 min → 90 sec`). Caption names form, input, and what was measured. **Stamp lands on the "after" panel** on first scroll-in.
 3. **How We Work** — background. Five rows, each a hairline-separated grid: `STEP.01` mono code in a narrow left column, heading + one-line body right. Mobile: code sits above heading, rules stay.
 4. **Trust** — background. Two stacked blocks: data handling commitment (plain language, `TODO` placeholders flagged) and a why-Indian-workflows block. Case-study component built, data-driven, hidden behind a flag.
