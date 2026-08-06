@@ -180,7 +180,12 @@ for (const route of routes) {
     )
     .replace('<!--app-->', app)
 
-  const out = route.path === '/' ? join(dist, 'index.html') : join(dist, route.path, 'index.html')
+  // `industries/ca-firms.html`, NOT `industries/ca-firms/index.html`. Pages
+  // serves a directory index only at the trailing-slash URL and 308s
+  // /industries/ca-firms to /industries/ca-firms/ to get there — which
+  // contradicts the canonical tag, the sitemap and llms.txt, all of which say
+  // no trailing slash. A flat .html file answers the no-slash URL with a 200.
+  const out = route.path === '/' ? join(dist, 'index.html') : join(dist, `${route.path}.html`)
   await mkdir(dirname(out), { recursive: true })
   await writeFile(out, html)
   console.log(`prerendered ${route.path} → ${out.replace(dist, 'dist')}`)
