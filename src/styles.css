@@ -128,6 +128,41 @@ video {
   background: var(--surface-sunken);
 }
 
+/* Accent band — singles one section out (Industries) instead of leaving it in
+   the alternating paper/slate rhythm. Deliberately not `.on-ink`: that variant
+   is tuned for --primary, and its muted --text-on-dark drops to 3.6:1 on this
+   green, under the AA floor. Everything here is white or near-white instead,
+   which clears 4.5:1 against #047857. Cards inside keep the default light
+   `.tile` — the band is the highlight, not the cards. */
+.tone-green {
+  background: var(--accent-strong);
+  color: #fff;
+}
+
+.tone-green h2,
+.tone-green h3,
+.tone-green .label {
+  color: #fff;
+}
+
+.tone-green .lead {
+  /* Near-white rather than a muted grey: hierarchy comes from the size and
+     weight step, which the display face already carries. */
+  color: color-mix(in srgb, #fff 92%, transparent);
+}
+
+.tone-green .section-head {
+  border-bottom-color: color-mix(in srgb, #fff 32%, transparent);
+}
+
+.tone-green .section-head .label::before {
+  background: #fff;
+}
+
+.tone-green :focus-visible {
+  outline-color: #fff;
+}
+
 .measure {
   max-width: 62ch;
 }

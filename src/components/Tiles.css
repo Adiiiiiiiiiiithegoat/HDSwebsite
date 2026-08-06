@@ -27,48 +27,39 @@
   text-decoration: none;
 }
 
-/* Linked tiles (Industries → an industry page) are filled with the same green
-   used for buttons and link hovers, so the actionable cards are distinguishable
-   from the static ones at a glance. White on --accent-strong is 5.5:1 — the
-   reason that token exists rather than the decorative --accent (see DESIGN.md).
-   `a.tile` is 0-1-1 specificity, so the 0-2-0 `.on-ink .tile` block below still
-   wins inside dark sections and this does not leak there. */
-a.tile {
-  background: var(--accent-strong);
-  border-color: var(--accent-strong);
-  color: #fff;
-  box-shadow: none;
-}
-
-/* h3 needs saying explicitly — the base `h1, h2, h3` rule in styles.css sets
-   color: var(--primary), so the title does not inherit the white above and
-   would sit navy-on-green at ~3.2:1. */
-a.tile h3 {
-  color: #fff;
-}
-
-a.tile .tile-tag,
-a.tile p {
-  color: color-mix(in srgb, #fff 84%, transparent);
-}
-
+/* Linked tiles (Industries → an industry page) stay light — the green band
+   behind them is the highlight. Border darkens to --primary rather than the
+   accent, which would barely register against the accent band. */
 a.tile:hover {
-  background: var(--primary);
   border-color: var(--primary);
 }
 
+/* .tile takes `color: inherit`, and .tone-green sets color: #fff on the band —
+   so pin the light-card colour back. Every text node in here happens to set its
+   own colour today, but anything added without one would land white on white. */
+.tone-green .tile {
+  color: var(--text);
+}
+
 /* margin-top:auto pins it to the bottom of the card, so tiles with different
-   body lengths still line their CTAs up. */
+   body lengths still line their CTAs up. Green marks it as the actionable
+   line, and it is the only clickable signal that survives on touch. */
 .tile-cta {
   margin-top: auto;
   padding-top: 6px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  color: var(--accent-strong);
   font-family: var(--mono);
   font-size: var(--fs-label);
+  font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.on-ink .tile-cta {
+  color: var(--accent);
 }
 
 .tile-cta .arrow {

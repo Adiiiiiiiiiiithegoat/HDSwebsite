@@ -5,7 +5,7 @@ import Tiles from '../../../components/Tiles.jsx'
 
 export default function Industries() {
   return (
-    <Section id="industries" tone="slate" ariaLabelledby="industries-title">
+    <Section id="industries" tone="green" ariaLabelledby="industries-title">
       <SectionHead
         label="Industries"
         titleId="industries-title"
