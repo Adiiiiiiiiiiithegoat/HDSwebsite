@@ -74,16 +74,17 @@ export default function Trust() {
           <div className="trust-block" data-reveal>
             <h3>We only build for this</h3>
             <p>
-              Solution Haven works on Indian compliance work and nothing else. That is a
-              limitation we chose. It means we already know that GSTR-1 and 3B are not
-              the same job, that September and October are not normal months, and that
-              an AOC-4 attachment fails for reasons the portal will not explain.
+              Solution Haven works on Indian compliance work, and not much else. It’s a
+              narrow scope, and we chose it deliberately. It means GSTR-1 and 3B are
+              already two different jobs to us, September and October are already marked
+              on our calendar, and when an AOC-4 attachment fails without explanation,
+              we’ve usually seen that particular silence before.
             </p>
             <p>
-              Generic automation tools are built for invoice processing in a warehouse
-              somewhere and pointed at your forms afterwards. Ours is written against the
-              utility, the schema and the deadline. When a form changes, we are already
-              looking at it — that maintenance is part of what you pay for, not a
+              Generic automation is built for invoice processing somewhere else and
+              pointed at your forms afterwards. Ours starts from the utility, the schema
+              and the deadline. When a form changes, we’re usually looking at it before
+              you ask — keeping up with those changes is part of what you pay for, not a
               separate quote.
             </p>
           </div>
