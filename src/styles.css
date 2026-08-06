@@ -140,8 +140,8 @@ video {
    the alternating paper/slate rhythm. Deliberately not `.on-ink`: that variant
    is tuned for --primary, and its muted --text-on-dark drops to 3.6:1 on this
    green, under the AA floor. Everything here is white or near-white instead,
-   which clears 4.5:1 against #047857. Cards inside keep the default light
-   `.tile` — the band is the highlight, not the cards. */
+   which clears 4.5:1 against #047857. The cards inside are filled with
+   --primary against it — see the .tone-green .tile block in Tiles.css. */
 .tone-green {
   background: var(--accent-strong);
   color: #fff;
@@ -169,36 +169,6 @@ video {
 
 .tone-green :focus-visible {
   outline-color: #fff;
-}
-
-/* Both industries share one navy panel on the green band. The buttons inside
-   keep the stock --accent-strong fill: green on navy is the same pairing every
-   other dark section uses, so no button override is needed here — which is why
-   the .tone-green .btn navy variant that the earlier loose layout required is
-   gone rather than left behind unused.
-   Two-up grid inside, same auto-fit/260px the tile cards used. */
-.industry-panel {
-  background: var(--primary);
-  color: var(--background);
-  border-radius: 2px;
-  padding: clamp(26px, 4vw, 44px);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: clamp(26px, 4vw, 48px);
-}
-
-/* align-items: flex-start keeps the button at its natural width instead of
-   stretching it across the column; margin-top: auto bottom-aligns the buttons
-   when the two descriptions run to different line counts. */
-.industry-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 18px;
-}
-
-.industry-item .btn {
-  margin-top: auto;
 }
 
 .measure {

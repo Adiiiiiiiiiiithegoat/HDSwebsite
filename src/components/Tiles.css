@@ -27,18 +27,38 @@
   text-decoration: none;
 }
 
-/* Linked tiles (Industries → an industry page) stay light — the green band
-   behind them is the highlight. Border darkens to --primary rather than the
-   accent, which would barely register against the accent band. */
 a.tile:hover {
   border-color: var(--primary);
 }
 
-/* .tile takes `color: inherit`, and .tone-green sets color: #fff on the band —
-   so pin the light-card colour back. Every text node in here happens to set its
-   own colour today, but anything added without one would land white on white. */
+/* Green-band variant — the Industries cards. The whole tile is --primary so it
+   reads dark blue against the green, with every text node inverted to
+   --background. Mirrors the .on-ink variant further down, except that one fills
+   with --secondary because it sits ON --primary and has to look raised; this
+   one sits on green, so the flat navy is the contrast.
+   h3 is named explicitly: the base `h1, h2, h3` rule sets color: var(--primary),
+   which a tile would otherwise inherit and render navy-on-navy. */
 .tone-green .tile {
-  color: var(--text);
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: none;
+  color: var(--background);
+}
+
+.tone-green .tile h3,
+.tone-green .tile-tag,
+.tone-green .tile p {
+  color: var(--background);
+}
+
+/* --accent, not --accent-strong: 8:1 on navy, where the darker green would sink
+   into it. Same choice .on-ink .tile-cta makes. */
+.tone-green .tile-cta {
+  color: var(--accent);
+}
+
+.tone-green a.tile:hover {
+  border-color: var(--accent);
 }
 
 /* margin-top:auto pins it to the bottom of the card, so tiles with different
