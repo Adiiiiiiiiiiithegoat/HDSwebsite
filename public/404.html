@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Page not found — Solution Haven</title>
+    <!--
+      Deliberately self-contained: no stylesheet, no script, no font. This file
+      is what Cloudflare Pages serves for anything not found, INCLUDING a missing
+      /assets/* URL — so it must not depend on the assets it is standing in for.
+
+      Its real job is the status code. Without a 404.html, Pages falls back to
+      index.html with a 200, so a stylesheet URL that missed came back as
+      "200 text/html" and got cached under the /assets/* immutable rule in
+      _headers. A 404 is never applied as a stylesheet or cached as a valid asset.
+    -->
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-content: center;
+        gap: 18px;
+        padding: 48px 24px;
+        background: #f8fafc;
+        color: #0f172a;
+        font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+      }
+      p {
+        margin: 0;
+        max-width: 46ch;
+        color: #475569;
+      }
+      h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        letter-spacing: -0.015em;
+      }
+      .code {
+        font-family: ui-monospace, Consolas, monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #047857;
+      }
+      a {
+        justify-self: start;
+        padding: 14px 24px;
+        border-radius: 2px;
+        background: #047857;
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="code">Error 404</span>
+    <h1>We couldn&rsquo;t find that page.</h1>
+    <p>
+      The link may be out of date, or the address mistyped. Everything we do is one click
+      away from the homepage.
+    </p>
+    <a href="/">Go to the homepage</a>
+  </body>
+</html>
