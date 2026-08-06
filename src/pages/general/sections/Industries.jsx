@@ -19,9 +19,12 @@ export default function Industries() {
       />
       <div className="industry-actions" data-reveal>
         {industries.tiles.map((tile) => (
-          <Button as={Link} to={tile.href} key={tile.href}>
-            {tile.title}
-          </Button>
+          <div className="industry-item" key={tile.href}>
+            <p>{tile.body}</p>
+            <Button as={Link} to={tile.href}>
+              {tile.title}
+            </Button>
+          </div>
         ))}
       </div>
     </Section>

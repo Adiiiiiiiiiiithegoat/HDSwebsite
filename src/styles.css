@@ -186,10 +186,26 @@ video {
   border-color: var(--secondary);
 }
 
+/* Same two-up grid the tile cards used, so the section keeps its old shape —
+   the description is just no longer inside a white card. */
 .industry-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(18px, 2.6vw, 24px) clamp(24px, 4vw, 48px);
+}
+
+/* align-items: flex-start keeps the button at its natural width instead of
+   stretching it across the column; margin-top: auto bottom-aligns the buttons
+   when the two descriptions run to different line counts. */
+.industry-item {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.industry-item .btn {
+  margin-top: auto;
 }
 
 .measure {
