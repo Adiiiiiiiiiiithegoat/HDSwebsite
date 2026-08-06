@@ -40,6 +40,13 @@ a.tile {
   box-shadow: none;
 }
 
+/* h3 needs saying explicitly — the base `h1, h2, h3` rule in styles.css sets
+   color: var(--primary), so the title does not inherit the white above and
+   would sit navy-on-green at ~3.2:1. */
+a.tile h3 {
+  color: #fff;
+}
+
 a.tile .tile-tag,
 a.tile p {
   color: color-mix(in srgb, #fff 84%, transparent);
