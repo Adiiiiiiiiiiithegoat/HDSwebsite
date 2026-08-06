@@ -6,7 +6,7 @@
 // --- Contact ---------------------------------------------------------------
 // No form, no backend. These are the only ways in.
 export const contact = {
-  email: 'hello@solutionhaven.net',
+  email: 'aditya@solutionhaven.net',
   phones: [
     { number: '+91 88797 60718', href: 'https://wa.me/918879760718' },
     { number: '+91 83830 79928', href: 'https://wa.me/918383079928' },

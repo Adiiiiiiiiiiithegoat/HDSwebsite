@@ -7,7 +7,7 @@
 
 // Matches src/content.js `contact.email` — same company, one inbox.
 export const contact = {
-  email: 'hello@solutionhaven.net',
+  email: 'aditya@solutionhaven.net',
 }
 
 export const legal = {

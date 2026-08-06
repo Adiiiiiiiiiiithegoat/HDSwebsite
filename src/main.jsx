@@ -36,7 +36,7 @@ class ErrorBoundary extends Component {
         <h1>Something went wrong on this page.</h1>
         <p>
           Reloading usually fixes it. If it keeps happening, email us at{' '}
-          <a href="mailto:hello@solutionhaven.net">hello@solutionhaven.net</a> and we will
+          <a href="mailto:aditya@solutionhaven.net">aditya@solutionhaven.net</a> and we will
           sort it out.
         </p>
         <button className="btn" type="button" onClick={() => window.location.reload()}>
