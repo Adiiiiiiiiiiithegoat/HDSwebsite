@@ -1,1 +1,5 @@
+# Missing build assets must 404, not fall through to the SPA rule below — that
+# served index.html with a 200 for a stale /assets/*.js request, so the browser
+# tried to parse HTML as JavaScript and the page died with no failure to detect.
+/assets/*  /index.html  404
 /*  /index.html  200

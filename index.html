@@ -69,7 +69,26 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- The header is painted from the HTML so the page is never blank while
+         the JS downloads — styles.css is a render-blocking <link> above, so
+         these classes are already applied at first paint. React clears this
+         on mount and renders the real header in its place. -->
+    <div id="root">
+      <header class="header">
+        <div class="wrap header-inner">
+          <span class="wordmark">Solution Haven</span>
+        </div>
+      </header>
+    </div>
+    <noscript>
+      <div class="wrap" style="padding: 96px 0; max-width: 640px">
+        <h1>This site needs JavaScript.</h1>
+        <p>
+          Turn it on and reload, or email us at
+          <a href="mailto:hello@solutionhaven.net">hello@solutionhaven.net</a>.
+        </p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

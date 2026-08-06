@@ -1,31 +1,77 @@
-import { StrictMode, Suspense, lazy, useEffect } from 'react'
+import { StrictMode, Component, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import './styles.css'
+import GeneralHome from './pages/general/GeneralHome.jsx'
+import CAFirmsRoute from './routes/CAFirmsRoute.jsx'
+import SolarRoute from './routes/SolarRoute.jsx'
 
-// ponytail: react-router keeps the old scroll position across route changes and
-// there is no native fix. `instant` because html has scroll-behavior: smooth —
-// without it a route change animates a long scroll back up. Hash links (#faq)
-// scroll themselves, so leave those alone.
+// ponytail: routes are static imports, not lazy(). Each is ~13 kB against a
+// 232 kB entry bundle, so splitting them saved ~5% of transfer and cost a
+// second round-trip — during which <Suspense fallback={null}> rendered
+// nothing, i.e. a white screen. Worse, a chunk that failed to load (stale
+// hash after a deploy, flaky network) blanked the page permanently. Vite
+// modulepreloads these alongside the entry now, so there is no waterfall.
+// Re-split only when a route is big enough that you can measure the win.
+
+// Nothing above this caught errors, so one throw anywhere unmounted the whole
+// tree and left an empty <div id="root"> — the white screen, with no way back
+// except a manual reload the user has no reason to try.
+class ErrorBoundary extends Component {
+  state = { failed: false }
+
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+
+  componentDidCatch(error, info) {
+    console.error('Uncaught error:', error, info)
+  }
+
+  render() {
+    if (!this.state.failed) return this.props.children
+
+    return (
+      <div className="wrap" style={{ padding: '96px 0', maxWidth: '640px' }}>
+        <h1>Something went wrong on this page.</h1>
+        <p>
+          Reloading usually fixes it. If it keeps happening, email us at{' '}
+          <a href="mailto:hello@solutionhaven.net">hello@solutionhaven.net</a> and we will
+          sort it out.
+        </p>
+        <button className="btn" type="button" onClick={() => window.location.reload()}>
+          Reload the page
+        </button>
+      </div>
+    )
+  }
+}
+
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
+
   useEffect(() => {
-    if (!hash) window.scrollTo({ top: 0, behavior: 'instant' })
+    if (hash) return // in-page anchors (#faq, #contact) scroll themselves
+
+    // ponytail: html sets scroll-behavior: smooth, so a plain scrollTo animates
+    // a long scroll up on every route change. `instant` overrides that, but the
+    // enum value is a TypeError on Safari < 15.4 — and a throw in an effect
+    // takes the whole page down, so fall back instead of trusting it.
+    try {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    } catch {
+      window.scrollTo(0, 0)
+    }
   }, [pathname, hash])
+
   return null
 }
 
-// Each route is its own chunk — visiting one page shouldn't pull the other
-// two industry pages' code across the wire.
-const GeneralHome = lazy(() => import('./pages/general/GeneralHome.jsx'))
-const CAFirmsRoute = lazy(() => import('./routes/CAFirmsRoute.jsx'))
-const SolarRoute = lazy(() => import('./routes/SolarRoute.jsx'))
-
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <ScrollToTop />
-      <Suspense fallback={null}>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<GeneralHome />} />
           {/* Industry landing pages. CA Firms is the first; Manufacturing,
@@ -35,7 +81,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/industries/solar" element={<SolarRoute />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </Suspense>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ErrorBoundary>
   </StrictMode>,
 )
