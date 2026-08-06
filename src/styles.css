@@ -1,6 +1,10 @@
 /* ==========================================================================
    Solution Haven — tokens, typography, and section styles.
    Palette rationale and contrast maths live in DESIGN.md.
+
+   Asset filenames are content-hashed, so editing this file mints a new URL.
+   That is the escape hatch if a stylesheet URL is ever cached wrong at the
+   edge — see public/_redirects for the incident that made it necessary.
    ========================================================================== */
 
 :root {

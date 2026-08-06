@@ -1,12 +1,12 @@
-# Build assets resolve to themselves and stop here. First match wins, so this
-# keeps /assets/* from ever reaching the SPA catch-all below.
+# Deep links for the client routes in src/main.jsx. Deliberately NOT a `/*`
+# catch-all: that matched /assets/* too, so an asset request that missed at an
+# edge during a deploy came back as 200 text/html instead of a 404 — and the
+# /assets/* rule in _headers then marked that wrong answer `immutable` for a
+# year. Edge and browser cached an HTML document under a .css/.js URL, and
+# whoever hit that node got an unstyled page (stylesheet refused) or a blank
+# one (script refused) until the cache expired.
 #
-# Without it, an asset request that misses (a hash not yet live at an edge
-# during a deploy) fell through to index.html and came back as 200 text/html —
-# which _headers then stamped `immutable, max-age=31536000`. The edge and the
-# browser cached an HTML document under a .css/.js URL for a year, so the page
-# rendered with no stylesheet, or no script at all, for whoever hit that node.
-/assets/*  /assets/:splat  200
-
-# SPA: every other path serves index.html and react-router takes over.
-/*  /index.html  200
+# With no rule matching /assets/*, a miss is a real 404, which no browser will
+# apply as a stylesheet or cache as a valid asset. Unknown paths now get the
+# Pages 404 rather than being bounced to "/" by the router.
+/industries/*  /index.html  200
